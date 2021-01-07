@@ -1,6 +1,7 @@
 import { AuthContext } from "../context/Auth";
 import { useContext, useEffect } from "react";
 import { parseCookies } from "../utils/parseCookies";
+import Head from "next/head";
 
 const Home = ({ cookies }) => {
   const { state, dispatch } = useContext(AuthContext);
@@ -15,6 +16,9 @@ const Home = ({ cookies }) => {
 
   return (
     <>
+      <Head>
+        <title>ISP Logger</title>
+      </Head>
       {state.isAuthenticated ? (
         <h1>Logged in</h1>
       ) : (

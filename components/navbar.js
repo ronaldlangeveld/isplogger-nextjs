@@ -21,7 +21,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="navbar is-spaced has-shadow" role="navigation" aria-label="main navigation">
+    <nav className="navbar is-spaced has-shadow is-white" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
       <Link href="/">
        <a className="navbar-item has-text-weight-bold">ISP Logger</a>
@@ -69,7 +69,6 @@ const Navbar = () => {
           </div>
             
         }
-         
         </div>
       </div>
     </div>

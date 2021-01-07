@@ -1,43 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../../components/authlayout";
 import Card from "../../components/dashboard/dashCards";
 import api from "../../utils/Api";
 import { parseCookies } from "../../utils/parseCookies";
+import OnBoardModal from "../../components/dashboard/onBoardModal";
+import Head from "next/head";
+import Link from 'next/link';
 
 const Dashboard = ({ networks }) => {
   const [networkList, setNetworkList] = useState(networks || null);
+  const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    if(networkList === null || networkList.length  === 0 ){
+      setModal(true);
+    }
+  }, [networkList])
 
   return (
     <Layout>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
       <section className="section">
         <div className="container">
           <div className="columns is-centered">
-            <div className="column is-6">
-           
-              {networkList !== null && networkList.length > 0 ? 
-              
-              (
+            <div className="column is-8">
+              {networkList !== null && networkList.length > 0 ? (
                 <>
-                   <h1 className="title">Your Networks</h1>
-                {
-                networkList.map((item, index) => (
-                  <Card key={index} data={item} />
-                ))
-                }
-                </>
-              )
-              : (
-                <>
-             
-                  <div className="content has-text-centered">
-                    <p><strong>Hi, Welcome to ISP Logger</strong></p>
-                    <p>To get started, let's create a network.</p>
-                    <div className="box">
-                  
-                    </div>
-                    <p>Don't worry, you can add more later on.</p>
+                <nav className="level is-mobile">
+                  <div className="level-left">
+                  <div className="level-item">
+                  <h1 className="title is-size-6-mobile">Your Networks</h1>
+                  </div>
+                  </div>
+                  <div className="level-right">
+                  <div className="level-item">
+                  <Link href="/networks/new"><a className="button is-primary is-size-7-mobile">Add Network</a></Link>
+                  </div>
                   </div>
 
+                </nav>
+
+             
+                  {networkList.map((item, index) => (
+                    <Card key={index} data={item} />
+                  ))}
+                </>
+              ) : (
+                <>
+                <h1 className="title">You don't have any networks setup</h1>
+                <Link href="/networks/new"><a className="button is-primary">Get started</a></Link>
+
+                <OnBoardModal 
+                active={modal} 
+                setmodal={setModal} />
+
+                 
                 </>
               )}
             </div>
