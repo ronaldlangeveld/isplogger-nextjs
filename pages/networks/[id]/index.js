@@ -1,24 +1,25 @@
+
 import { useRouter } from "next/router";
-import api from "../../utils/Api";
-import { parseCookies } from "../../utils/parseCookies";
-import Layout from "../../components/authlayout";
+import api from "../../../utils/Api";
+import { parseCookies } from "../../../utils/parseCookies";
+import Layout from "../../../components/authlayout";
 import { useEffect, useState } from "react";
-import LatestCard from "../../components/network/latestCard";
+import LatestCard from "../../../components/network/latestCard";
 import Head from "next/head";
 import cookie from "js-cookie";
+import ClipLoader from "react-spinners/ClipLoader";
+import Chart from "../../../components/network/networkchart";
+// import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';
+import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
+import 'react-calendar/dist/Calendar.css';
 
-const Network = ({ networks, cookies }) => {
+const Network = ({ networks, cookies, latest }) => {
   const [networkInfo, setNetworkInfo] = useState(networks || null);
+  const [latestTest, setLatest] = useState(latest || null)
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  //DUMMY NUMBERS, FIX IT
-  //   const SPEEDS = {
-  //     Bps: 1,
-  //     Kbps: 1000,
-  //     Mbps: 1000000,
-  //     Gbps: 1000000000,
-  //   };
+  const [range, setRange] = useState([new Date(), new Date()]);
 
   const speedunits = [
     {
@@ -42,7 +43,7 @@ const Network = ({ networks, cookies }) => {
       conversion: 1000000000,
     },
   ];
-  const [speeds, setSpeeds] = useState(speedunits);
+  const [speeds, setSpeeds] = useState(speedunits || "");
 
   const [units, setUnits] = useState({
     key: 2,
@@ -50,9 +51,9 @@ const Network = ({ networks, cookies }) => {
     conversion: 1000000,
   });
 
-  //   useEffect(() => {
+    useEffect(() => {
 
-  //   }, [units]);
+    }, [units]);
 
   const onChangeSpeeds = (e) => {
     console.log(e.target.value);
@@ -73,18 +74,20 @@ const Network = ({ networks, cookies }) => {
   console.log(networks);
 
   const GetData = () => {
-    api.get(`network/${id}/tests`, {
-      headers: { Authorization: `Token ${cookies.ttk}` },
-    }).then(
-      (res) => {
-        setResults(res.data);
-        setLoading(false);
-      },
-      (err) => {
-        console.log(err);
-        setLoading(false);
-      }
-    );
+    api
+      .get(`network/${id}/tests`, {
+        headers: { Authorization: `Token ${cookies.ttk}` },
+      })
+      .then(
+        (res) => {
+          setResults(res.data);
+          setLoading(false);
+        },
+        (err) => {
+          console.log(err);
+          setLoading(false);
+        }
+      );
   };
 
   useEffect(() => {
@@ -107,13 +110,11 @@ const Network = ({ networks, cookies }) => {
         </title>
       </Head>
       <section className="section">
-        <div className="container">
-          <div className="columns is-centered">
-            <div className="column is-8">
-              <div className="mb-6">
+          <div className="container">
+            <div className="columns is-centered">
+              <div className="column is-8">
                 <div className="has-text-right">
                   <div className="field">
-                    {/* <label className="label">Speed</label> */}
                     <div className="control">
                       <div className="select">
                         <select onChange={onChangeSpeeds} value={units.key}>
@@ -133,23 +134,49 @@ const Network = ({ networks, cookies }) => {
                 <p className="mb-6 has-text-centered ">
                   Network ID: <code>{networkInfo.secret}</code>
                 </p>
-                {loading ? (
-                  <>
-                    <div>
-                      <progress className="progress is-primary" max="100">
-                        30%
-                      </progress>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {results.length > 0 && results !== null ? (
-                      <>
-                        <LatestCard units={units} data={results[0]} />
-                      </>
-                    ) : (
-                      <>
-                        <div className="content has-text-centered">
+                <LatestCard units={units} data={latest} />
+              </div>
+            </div>
+          </div>
+        </section>
+      {loading ? (
+        <div className="has-text-centered mt-6">
+          <ClipLoader size={50} color={"#123abc"} loading={true} />
+        </div>
+      ) : (
+       <section className="section">
+           <div className="container">
+            <div className="has-text-centered mx-4 my-4">
+            <DateRangePicker
+        onChange={setRange}
+        value={range}
+      />
+    <br/>
+      <button className="button is-primary mt-2">
+          Filter
+      </button>
+      
+            </div>
+                {
+                    results.length > 0 && results !== null ?
+                    <>
+                    <Chart units={units} data={results} />
+                    </>
+                    :
+                    <>
+                     {/* <div className="content has-text-centered">
+                          <p>
+                            Looks like you haven't configured a device on this
+                            network to collect data.
+                          </p>
+                          <p>
+                            To get started, install the app on a device on the
+                            network you want to analyze and enter the
+                            <code>Network ID</code>.
+                          </p>
+                          <p>Please keep it a secret.</p>
+                        </div> */}
+                         <div className="content has-text-centered">
                           <p>
                             Looks like you haven't configured a device on this
                             network to collect data.
@@ -161,15 +188,11 @@ const Network = ({ networks, cookies }) => {
                           </p>
                           <p>Please keep it a secret.</p>
                         </div>
-                      </>
-                    )}
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                    </>
+                }
+           </div>
+       </section>
+      )}
     </Layout>
   );
 };
@@ -183,11 +206,13 @@ export async function getServerSideProps(context) {
     const res = await api.get(`network/${id}/`, {
       headers: { Authorization: `Token ${cookies.ttk}` },
     });
-    const networks = res.data;
+    const networks = res.data.network;
+    const latest = res.data.latest;
     return {
       props: {
         networks,
-        cookies
+        latest,
+        cookies,
       },
     };
   } catch (err) {

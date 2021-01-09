@@ -3,7 +3,8 @@ import {AuthContextProvider} from '../context/Auth';
 import Navbar from '../components/navbar';
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
-import 'nprogress/nprogress.css'; //styles of nprogress
+import '../styles/nprogress.css';
+// import 'nprogress/nprogress.css'; //styles of nprogress
 
 
 Router.events.on('routeChangeStart', () => NProgress.start()); 
