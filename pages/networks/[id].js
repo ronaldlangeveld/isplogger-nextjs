@@ -7,7 +7,7 @@ import LatestCard from "../../components/network/latestCard";
 import Head from "next/head";
 import cookie from "js-cookie";
 
-const Network = ({ networks }) => {
+const Network = ({ networks, cookies }) => {
   const [networkInfo, setNetworkInfo] = useState(networks || null);
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -73,7 +73,9 @@ const Network = ({ networks }) => {
   console.log(networks);
 
   const GetData = () => {
-    api.get(`network/${id}/tests`).then(
+    api.get(`network/${id}/tests`, {
+      headers: { Authorization: `Token ${cookies.ttk}` },
+    }).then(
       (res) => {
         setResults(res.data);
         setLoading(false);
@@ -185,6 +187,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         networks,
+        cookies
       },
     };
   } catch (err) {
