@@ -1,4 +1,3 @@
-
 import { useRouter } from "next/router";
 import api from "../../../utils/Api";
 import { parseCookies } from "../../../utils/parseCookies";
@@ -10,16 +9,18 @@ import cookie from "js-cookie";
 import ClipLoader from "react-spinners/ClipLoader";
 import Chart from "../../../components/network/networkchart";
 // import DateRangePicker from '@wojtekmaj/react-daterange-picker';
-import DateRangePicker from '@wojtekmaj/react-daterange-picker/dist/entry.nostyle';
-import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
-import 'react-calendar/dist/Calendar.css';
+import DateRangePicker from "@wojtekmaj/react-daterange-picker/dist/entry.nostyle";
+import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
+import "react-calendar/dist/Calendar.css";
+import moment from "moment";
 
 const Network = ({ networks, cookies, latest }) => {
   const [networkInfo, setNetworkInfo] = useState(networks || null);
-  const [latestTest, setLatest] = useState(latest || null)
+  const [latestTest, setLatest] = useState(latest || null);
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(true);
   const [range, setRange] = useState([new Date(), new Date()]);
+  const [filterBtn, setFilterBtn] = useState(false);
 
   const speedunits = [
     {
@@ -51,9 +52,7 @@ const Network = ({ networks, cookies, latest }) => {
     conversion: 1000000,
   });
 
-    useEffect(() => {
-
-    }, [units]);
+  useEffect(() => {}, [units]);
 
   const onChangeSpeeds = (e) => {
     console.log(e.target.value);
@@ -102,6 +101,33 @@ const Network = ({ networks, cookies, latest }) => {
     }
   }, []);
 
+  const onFilter = () => {
+    if (range[0] > new Date() && range[1] > new Date()) {
+      alert("Oops, you cannot select future dates.");
+    } else {
+      setFilterBtn(true);
+      api
+        .get(
+          `network/${id}/tests/?start=${moment(
+            range[0]
+          ).toISOString()}&end=${moment(range[1]).toISOString()}`,
+          {
+            headers: { Authorization: `Token ${cookies.ttk}` },
+          }
+        )
+        .then(
+          (res) => {
+            setResults(res.data);
+            setFilterBtn(false);
+          },
+          (err) => {
+            console.log(err);
+            setFilterBtn(false);
+          }
+        );
+    }
+  };
+
   return (
     <Layout>
       <Head>
@@ -110,88 +136,87 @@ const Network = ({ networks, cookies, latest }) => {
         </title>
       </Head>
       <section className="section">
-          <div className="container">
-            <div className="columns is-centered">
-              <div className="column is-8">
-                <div className="has-text-right">
-                  <div className="field">
-                    <div className="control">
-                      <div className="select">
-                        <select onChange={onChangeSpeeds} value={units.key}>
-                          {speeds.map((item, index) => (
-                            <option key={index} value={index}>
-                              {item.unit}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
+        <div className="container">
+          <div className="columns is-centered">
+            <div className="column is-8">
+              <div className="has-text-right">
+                <div className="field">
+                  <div className="control">
+                    <div className="select">
+                      <select onChange={onChangeSpeeds} value={units.key}>
+                        {speeds.map((item, index) => (
+                          <option key={index} value={index}>
+                            {item.unit}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
                 </div>
-                <h1 className="subtitle is-4 has-text-centered">
-                  Network Analytics for <strong>{networkInfo.name}</strong>
-                </h1>
-                <p className="mb-6 has-text-centered ">
-                  Network ID: <code>{networkInfo.secret}</code>
-                </p>
-                <LatestCard units={units} data={latest} />
               </div>
+              <h1 className="subtitle is-4 has-text-centered">
+                Network Analytics for <strong>{networkInfo.name}</strong>
+              </h1>
+              <p className="mb-6 has-text-centered ">
+                Network ID: <code>{networkInfo.secret}</code>
+              </p>
+              {latest !== null ? (
+                <LatestCard units={units} data={latest} />
+              ) : (
+                <>
+                </>
+              )}
             </div>
           </div>
-        </section>
-      {loading ? (
-        <div className="has-text-centered mt-6">
-          <ClipLoader size={50} color={"#123abc"} loading={true} />
         </div>
-      ) : (
-       <section className="section">
-           <div className="container">
-            <div className="has-text-centered mx-4 my-4">
-            <DateRangePicker
-        onChange={setRange}
-        value={range}
-      />
-    <br/>
-      <button className="button is-primary mt-2">
-          Filter
-      </button>
-      
+      </section>
+      {latest ? (
+        <>
+          {loading ? (
+            <div className="has-text-centered mt-6">
+              <ClipLoader size={50} color={"#123abc"} loading={true} />
             </div>
-                {
-                    results.length > 0 && results !== null ?
-                    <>
+          ) : (
+            <section>
+              <div className="container">
+                {results.length > 0 && results !== null ? (
+                  <>
+                    <div className="has-text-centered mx-4 my-4">
+                      <DateRangePicker onChange={setRange} value={range} />
+                      <br />
+                      <button
+                        onClick={onFilter}
+                        className={`button is-primary mt-2 ${
+                          filterBtn ? "is-loading" : ""
+                        }`}
+                      >
+                        Filter
+                      </button>
+                    </div>
                     <Chart units={units} data={results} />
-                    </>
-                    :
-                    <>
-                     {/* <div className="content has-text-centered">
-                          <p>
-                            Looks like you haven't configured a device on this
-                            network to collect data.
-                          </p>
-                          <p>
-                            To get started, install the app on a device on the
-                            network you want to analyze and enter the
-                            <code>Network ID</code>.
-                          </p>
-                          <p>Please keep it a secret.</p>
-                        </div> */}
-                         <div className="content has-text-centered">
-                          <p>
-                            Looks like you haven't configured a device on this
-                            network to collect data.
-                          </p>
-                          <p>
-                            To get started, install the app on a device on the
-                            network you want to analyze and enter the
-                            <code>Network ID</code>.
-                          </p>
-                          <p>Please keep it a secret.</p>
-                        </div>
-                    </>
-                }
-           </div>
-       </section>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </section>
+          )}
+        </>
+      ) : (
+        <>
+          <div className="content has-text-centered">
+            <p>
+              Looks like you haven't configured a device on this network to
+              collect data.
+            </p>
+            <p>
+              To get started, install the docker app on a device on the network you
+              want to analyze and enter the
+              <code>Network ID</code>.
+            </p>
+            <p>Please keep it a secret.</p>
+          </div>
+        </>
       )}
     </Layout>
   );

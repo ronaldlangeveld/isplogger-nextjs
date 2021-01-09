@@ -7,32 +7,32 @@ const LatestCard = ({data, units}) => {
     return (
         <div className="card">
             <div className="card-header">
-            <p className="card-header-title">Latest Results</p>
+            <p className="card-header-title">Summary</p>
             </div>
         <div className="card-content">
-        <nav class="level mt-4">
-    <div class="level-item has-text-centered">
+        <nav className="level mt-4">
+    <div className="level-item has-text-centered">
         <div>
-            <p class="heading">Done</p>
-            <p class="title is-5"><time>{moment(data.created_at).from()}</time></p>
+            <p className="heading">Total Tests</p>
+            <p className="title is-5">{data.tests}</p>
         </div>
     </div>
-    <div class="level-item has-text-centered">
+    <div className="level-item has-text-centered">
         <div>
-            <p class="heading">Download</p>
-            <p class="title is-5">{parseFloat(data.download/units.conversion).toFixed(2)} {units.unit}</p>
+            <p className="heading">Avg Download</p>
+            <p className="title is-5">{parseFloat(data.avg_down/units.conversion).toFixed(2)} {units.unit}</p>
         </div>
     </div>
-    <div class="level-item has-text-centered">
+    <div className="level-item has-text-centered">
         <div>
-            <p class="heading">Upload</p>
-            <p class="title is-5 ">{parseFloat(data.upload/units.conversion).toFixed(2)} {units.unit}</p>
+            <p className="heading">Avg Upload</p>
+            <p className="title is-5 ">{parseFloat(data.avg_up/units.conversion).toFixed(2)} {units.unit}</p>
         </div>
     </div>
-    <div class="level-item has-text-centered">
+    <div className="level-item has-text-centered">
         <div>
-            <p class="heading">Latency</p>
-            <p class="title is-5 ">{parseFloat(data.ping).toFixed(0)} ms</p>
+            <p className="heading">Avg Latency</p>
+            <p className="title is-5 ">{parseFloat(data.ping_avg).toFixed(0)} ms</p>
         </div>
     </div>
 </nav>
