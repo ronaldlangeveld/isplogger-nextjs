@@ -8,11 +8,11 @@ import Landing from '../components/landing';
 const Home = ({ cookies }) => {
   const { state, dispatch } = useContext(AuthContext);
 
-  // console.log(cookies);
+  console.log(cookies);
 
   useEffect(() => {
     if (cookies.ttk) {
-      dispatch({ type: "LOGIN" });
+      dispatch({ type: "LOGIN", payload: cookies.tkk });
     }
   }, [cookies]);
 

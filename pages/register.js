@@ -5,7 +5,7 @@ import api from "../utils/Api";
 import cookie from "js-cookie";
 import Head from "next/head";
 import Link from "next/link";
-import {validateEmail} from '../utils/validateEmail';
+import { validateEmail } from '../utils/validateEmail';
 
 const Register = () => {
   const history = useRouter();
@@ -16,11 +16,15 @@ const Register = () => {
   const [btnDisable, setBtnDisable] = useState(true);
 
   const [validForm, setValidForm] = useState({
-    'email': true,
-    'username': true
+    'email': false,
+    'username': false
   })
 
   const registerUser = (e) => {
+    setValidForm({
+      'email': false,
+      'username': false
+    })
     setInvalid(false);
     e.preventDefault();
     console.log(e.target);
@@ -30,35 +34,35 @@ const Register = () => {
     var password = e.target.password.value;
     var password2 = e.target.password_two.value;
 
-    if(password === password2){
-        api
-      .post("create-account/", {
-        email: email,
-        username: username,
-        password: password,
-        password_two: password2
-      })
-      .then(
-        (res) => {
-          setSuccess(true);
-          console.log(res);
-          cookie.set("ttk", res.data.token, { expires: 365 });
-          dispatch({ type: "LOGIN" });
-          console.log(state);
-          history.push("/dashboard");
-          setBtnLoad(false);
-          setInvalid(false);
-        },
-        (err) => {
-          console.log(err);
-          setBtnLoad(false);
-          setInvalid(true);
-          //   history.push("/dashboard");
-        }
-      );
+    if (password === password2) {
+      api
+        .post("create-account/", {
+          email: email,
+          username: username,
+          password: password,
+          password_two: password2
+        })
+        .then(
+          (res) => {
+            setSuccess(true);
+            console.log(res);
+            cookie.set("ttk", res.data.token, { expires: 365 });
+            dispatch({ type: "LOGIN", payload: res.data.token });
+            console.log(state);
+            history.push("/dashboard");
+            setBtnLoad(false);
+            setInvalid(false);
+          },
+          (err) => {
+            console.log(err.response);
+            setBtnLoad(false);
+            setValidForm(err.response.data)
+            //   history.push("/dashboard");
+          }
+        );
     } else {
-        alert("Passwords doesn't match");
-        setBtnLoad(false);
+      alert("Passwords doesn't match");
+      setBtnLoad(false);
     }
   };
 
@@ -68,28 +72,6 @@ const Register = () => {
     }
   }, [state]);
 
-
-  const validateEmailAddress = (e) => {
-    let email = e.target.value;
-    if(validateEmail(email)){
-      api.post("validate-email/", {"email":e.target.value}).then((res)=> {
-        console.log('invalid');
-        setValidForm({
-          ...validForm,
-          email: false
-        });
-      }, (err) => {
-        console.log('valid')
-        setValidForm({
-          ...validForm,
-          email: true
-        })
-      });
-    } else {
-      console.log('invalid email')
-    }
-  
-  };
 
   return (
     <>
@@ -107,18 +89,30 @@ const Register = () => {
                   <form onSubmit={registerUser}>
                     <div className="field">
                       <label className="label">Email</label>
-                      { validForm.email ?
-                      <>
-                      </>
-                      :
-                      <p className="help">Email already in use.</p>  
-                    }
+                      {validForm.email ?
+                        <>
+                          <p className="help has-text-danger">Email already in use.</p>
+                        </>
+                        :
+                        <>
+                        </>
+
+                      }
                       <div className="control">
-                        <input onKeyUp={validateEmailAddress} name="email" className="input" type="email" />
+                        <input name="email" className="input" type="email" />
                       </div>
                     </div>
                     <div className="field">
                       <label className="label">Username</label>
+                      {validForm.username ?
+                        <>
+                          <p className="help has-text-danger">Username already in use.</p>
+                        </>
+                        :
+                        <>
+                        </>
+
+                      }
                       <div className="control">
                         <input name="username" className="input" type="text" />
                       </div>
@@ -144,27 +138,26 @@ const Register = () => {
                       </div>
                     </div>
                     <div className="has-text-centered">
-                    {success ? (
-                    <div className="notification is-success">
-                      <p className="has-text-weight-bold">
-                        Successfully created an account. Taking you to your dashboard.
+                      {success ? (
+                        <div className="notification is-success">
+                          <p className="has-text-weight-bold">
+                            Successfully created an account. Taking you to your dashboard.
                       </p>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="has-text-centered">
-                        <button
-                          disabled={btnDisable}
-                          type="submit"
-                          className={`mt-4 button is-primary is-size-6 is-fullwidth ${
-                            btnLoad ? "is-loading" : ""
-                          }`}
-                        >
-                          <strong>Create Account</strong>
-                        </button>
-                      </div>
-                    </>
-                  )}
+                        </div>
+                      ) : (
+                          <>
+                            <div className="has-text-centered">
+                              <button
+                                // disabled={btnDisable}
+                                type="submit"
+                                className={`mt-4 button is-primary is-size-6 is-fullwidth ${btnLoad ? "is-loading" : ""
+                                  }`}
+                              >
+                                <strong>Create Account</strong>
+                              </button>
+                            </div>
+                          </>
+                        )}
                     </div>
                   </form>
                 </div>

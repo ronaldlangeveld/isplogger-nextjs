@@ -100,9 +100,14 @@ const Network = ({ networks, cookies, latest }) => {
     GetData();
     try {
       const speedKey = cookie.get("speed");
-      const speedval = speeds[speedKey];
+      if(speedKey){
+        const speedval = speeds[speedKey];
       console.log(speedval);
       setUnits(speedval);
+      } else {
+        const speedval = speeds[2];
+        setUnits(speedval)
+      }
     } catch (err) {
       console.log(err);
     }
