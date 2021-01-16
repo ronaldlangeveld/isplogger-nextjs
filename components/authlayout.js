@@ -16,7 +16,7 @@ const Layout = ({children}) => {
         if(token){
             
             console.log(token);
-            dispatch({ type: "LOGIN" });
+            dispatch({ type: "LOGIN", payload: {token: token} });
         } else {
 
             history.push('/login');

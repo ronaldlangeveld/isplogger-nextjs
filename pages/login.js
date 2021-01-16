@@ -27,7 +27,7 @@ const Login = () => {
           setSuccess(true);
           console.log(res);
           cookie.set("ttk", res.data.token, { expires: 365 });
-          dispatch({ type: "LOGIN", payload: res.data.token });
+          dispatch({ type: "LOGIN", payload: {token: res.data.token}});
           console.log(state);
           history.push("/dashboard");
           setBtnLoad(false);

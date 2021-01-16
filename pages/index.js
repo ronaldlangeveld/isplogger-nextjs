@@ -12,7 +12,7 @@ const Home = ({ cookies }) => {
 
   useEffect(() => {
     if (cookies.ttk) {
-      dispatch({ type: "LOGIN", payload: cookies.tkk });
+      dispatch({ type: "LOGIN", payload: {token: cookies.tkk} });
     }
   }, [cookies]);
 
