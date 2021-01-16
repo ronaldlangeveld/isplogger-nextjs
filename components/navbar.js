@@ -24,7 +24,7 @@ const Navbar = () => {
     <nav className="navbar is-spaced has-shadow is-white" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
       <Link href="/">
-       <a className="navbar-item has-text-weight-bold">ISP Logger</a>
+       <a className="navbar-item has-text-weight-bold">⚡ ISP Logger</a>
       </Link>
   
       <a role="button" className={`navbar-burger ${burger ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

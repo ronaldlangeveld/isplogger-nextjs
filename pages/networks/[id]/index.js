@@ -12,6 +12,8 @@ import Chart from "../../../components/network/networkchart";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker/dist/entry.nostyle";
 import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
 import "react-calendar/dist/Calendar.css";
+import ResultsTable from '../../../components/network/resultsTable';
+import NetworkIdModal from '../../../components/network/networkIdModal';
 import moment from "moment";
 
 const Network = ({ networks, cookies, latest }) => {
@@ -19,8 +21,13 @@ const Network = ({ networks, cookies, latest }) => {
   const [latestTest, setLatest] = useState(latest || null);
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [range, setRange] = useState([new Date(), new Date()]);
+  const today = new Date();
+  const yesterday = new Date(today);
+
+  const [range, setRange] = useState([yesterday.setDate(yesterday.getDate()-2), new Date()]);
   const [filterBtn, setFilterBtn] = useState(false);
+
+  const [idModal, setIdModal] = useState(false);
 
   const speedunits = [
     {
@@ -128,6 +135,10 @@ const Network = ({ networks, cookies, latest }) => {
     }
   };
 
+  const toggleNetModal = () => {
+    setIdModal(!idModal);
+  };
+
   return (
     <Layout>
       <Head>
@@ -158,7 +169,8 @@ const Network = ({ networks, cookies, latest }) => {
                 Network Analytics for <strong>{networkInfo.name}</strong>
               </h1>
               <p className="mb-6 has-text-centered ">
-                Network ID: <code>{networkInfo.secret}</code>
+                <code onClick={toggleNetModal} className="is-clickable">Click to see the Network ID</code>
+                <NetworkIdModal active={idModal} secret={networkInfo.secret} toggle={toggleNetModal}  />
               </p>
               {latest !== null ? (
                 <LatestCard units={units} data={latest} />
@@ -170,6 +182,7 @@ const Network = ({ networks, cookies, latest }) => {
           </div>
         </div>
       </section>
+      <hr/>
       {latest ? (
         <>
           {loading ? (
@@ -178,10 +191,12 @@ const Network = ({ networks, cookies, latest }) => {
             </div>
           ) : (
             <section>
+            
               <div className="container">
                 {results.length > 0 && results !== null ? (
                   <>
-                    <div className="has-text-centered mx-4 my-4">
+                  
+                    <div className="has-text-right mx-4 my-4">
                       <DateRangePicker onChange={setRange} value={range} />
                       <br />
                       <button
@@ -194,6 +209,7 @@ const Network = ({ networks, cookies, latest }) => {
                       </button>
                     </div>
                     <Chart units={units} data={results} />
+                    <ResultsTable units={units} data={results} />
                   </>
                 ) : (
                   <></>
@@ -243,7 +259,7 @@ export async function getServerSideProps(context) {
   } catch (err) {
     if (context.res) {
       context.res.writeHead(302, {
-        Location: "/",
+        Location: "/login",
       });
       context.res.end();
     }

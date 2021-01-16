@@ -2,6 +2,8 @@ import { AuthContext } from "../context/Auth";
 import { useContext, useEffect } from "react";
 import { parseCookies } from "../utils/parseCookies";
 import Head from "next/head";
+import Landing from '../components/landing';
+
 
 const Home = ({ cookies }) => {
   const { state, dispatch } = useContext(AuthContext);
@@ -19,24 +21,30 @@ const Home = ({ cookies }) => {
       <Head>
         <title>ISP Logger</title>
       </Head>
-      {state.isAuthenticated ? (
-        <h1>Logged in</h1>
-      ) : (
-        <div>
-          <h1>Welcome to ISP Logger</h1>
-        </div>
-      )}
+    <Landing auth={state}/>
     </>
   );
 };
 
+
 export async function getServerSideProps(context) {
-  const cookies = parseCookies(context.req);
-  return {
-    props: {
-      cookies,
-    },
-  };
+  try {
+    const cookies = parseCookies(context.req);
+    return {
+      props: {
+        cookies,
+      },
+    };
+  } catch (err) {
+    if (context.res) {
+      context.res.writeHead(302, {
+        Location: "/",
+      });
+      context.res.end();
+    }
+
+    return {};
+  }
 }
 
 export default Home;

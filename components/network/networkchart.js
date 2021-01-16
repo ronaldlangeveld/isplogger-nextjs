@@ -76,7 +76,7 @@ const Chart = ({ units, data }) => {
     <Line
     options={options}
     data={bardata}
-    height={100}
+    height={120}
     />
     </>
   )
