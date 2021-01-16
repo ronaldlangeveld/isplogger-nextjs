@@ -81,7 +81,7 @@ const Network = ({ networks, cookies, latest }) => {
 
   const GetData = () => {
     api
-      .get(`network/${id}/tests`, {
+      .get(`network/${id}/tests/`, {
         headers: { Authorization: `Token ${cookies.ttk}` },
       })
       .then(
