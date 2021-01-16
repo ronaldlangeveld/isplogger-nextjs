@@ -27,7 +27,7 @@ const Navbar = () => {
        <a className="navbar-item has-text-weight-bold">⚡ ISP Logger</a>
       </Link>
   
-      <a role="button" className={`navbar-burger ${burger ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <a onClick={activateMenu} role="button" className={`navbar-burger ${burger ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
