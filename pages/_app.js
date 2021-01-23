@@ -1,6 +1,5 @@
 import '../styles/globals.scss';
 import {AuthContextProvider} from '../context/Auth';
-import Navbar from '../components/navbar';
 import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
 import '../styles/nprogress.css';
@@ -14,7 +13,6 @@ Router.events.on('routeChangeError', () => NProgress.done());
 function MyApp({ Component, pageProps }) {
   return (
     <AuthContextProvider>
-      <Navbar />
       <Component {...pageProps} />
     </AuthContextProvider>
   )

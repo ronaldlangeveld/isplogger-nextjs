@@ -1,11 +1,12 @@
 import Image from 'next/image';
+import LandNav from './landNav';
 import Link from 'next/link';
-
 
 const Landing = ({ auth }) => {
   return (
     <>
-      <section className="hero is-primary is-fullheight is-bold">
+     <LandNav />
+      <section className="hero is-white is-large is-bold">
         <div className="hero-body">
           <div className="container">
             <div className="columns">
@@ -18,16 +19,9 @@ const Landing = ({ auth }) => {
                   Automated internet speed logger for your connection at home,
                   office and servers.
                 </h2>
-                {
-                  auth.isAuthenticated ?
-                    <Link href="/dashboard">
-                      <button className="button is-link has-text-weight-bold is-size-6 ">Go to your dashboard</button>
+                <Link href="/register" className="button is-link has-text-weight-bold is-size-6 ">
+                      <button className="button is-primary has-text-weight-bold is-size-6 ">Get started for free</button>
                     </Link>
-                    :
-                    <Link href="/register" className="button is-link has-text-weight-bold is-size-6 ">
-                      <button className="button is-link has-text-weight-bold is-size-6 ">Get started for free</button>
-                    </Link>
-                }
 
                 <br />
                 <p className="mt-4">
@@ -45,7 +39,7 @@ const Landing = ({ auth }) => {
           </div>
         </div>
       </section>
-      <section className="hero is-medium is-light is-bold">
+      <section className="hero is-medium is-link is-bold">
         <div className="hero-body">
 
           <div className="container">

@@ -36,7 +36,7 @@ const Dashboard = ({ networks }) => {
                   </div>
                   <div className="level-right">
                   <div className="level-item">
-                  <Link href="/networks/new"><a className="button is-primary is-size-7-mobile">Add Network</a></Link>
+                  <Link href="/networks/new"><a className="button is-link is-outlined is-size-7-mobile is-rounded">Add Network</a></Link>
                   </div>
                   </div>
 

@@ -5,6 +5,8 @@ import api from "../utils/Api";
 import cookie from "js-cookie";
 import Head from "next/head";
 import Link from "next/link";
+import LandNav from '../components/landNav';
+
 const Login = () => {
   const history = useRouter();
   const { state, dispatch } = useContext(AuthContext);
@@ -53,6 +55,7 @@ const Login = () => {
       <Head>
         <title>Login - ISP Logger</title>
       </Head>
+      <LandNav />
       <section className="section">
         <div className="columns is-centered">
           <div className="column is-4">

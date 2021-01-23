@@ -2,13 +2,15 @@ import React, { createContext, useReducer} from "react";
 import cookie from 'js-cookie';
 // import { useCookies } from 'react-cookie';
 
+
 export const AuthContext = createContext();
 
 
 
 const initialState = {
   isAuthenticated: false,
-  token: cookie.get('ttk')
+  token: cookie.get('ttk') || "",
+  user_data: null
 };
 
 export const AuthReducer = (state, action) => {
@@ -17,7 +19,9 @@ export const AuthReducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        token: action.payload.token
+        token: action.payload.token,
+        user_data: action.payload.user_data
+        
       };
 
 
@@ -26,7 +30,8 @@ export const AuthReducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: false,
-        token: ""
+        token: "",
+        user_data: ""
       }
 
 

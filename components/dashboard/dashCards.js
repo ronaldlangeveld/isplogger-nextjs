@@ -15,7 +15,7 @@ const Card = ({ data }) => {
           <div className="level-right">
             <div className="level-item">
               <Link href={`/networks/${data.id}`}>
-                <a className="button is-primary is-size-7">Analytics</a>
+                <a className="button is-link is-size-7">Analytics</a>
               </Link>
             </div>
           </div>

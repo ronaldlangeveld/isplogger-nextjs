@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
+import Link from 'next/link';
 import api from "../../../utils/Api";
 import { parseCookies } from "../../../utils/parseCookies";
 import Layout from "../../../components/authlayout";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import LatestCard from "../../../components/network/latestCard";
 import Head from "next/head";
 import cookie from "js-cookie";
@@ -15,8 +16,10 @@ import "react-calendar/dist/Calendar.css";
 import ResultsTable from '../../../components/network/resultsTable';
 import NetworkIdModal from '../../../components/network/networkIdModal';
 import moment from "moment";
+import {AuthContext} from '../../../context/Auth';
 
 const Network = ({ networks, cookies, latest }) => {
+  const {state} = useContext(AuthContext);
   const [networkInfo, setNetworkInfo] = useState(networks || null);
   const [latestTest, setLatest] = useState(latest || null);
   const [results, setResults] = useState(null);
@@ -200,18 +203,66 @@ const Network = ({ networks, cookies, latest }) => {
               <div className="container">
                 {results.length > 0 && results !== null ? (
                   <>
+
+{
+                       state.user_data ?
+                       <>
+                       {
+                         state.user_data.pro ?
+                         <>
+                         </>
+                       :
+                       <div className="notification is-link">
+                        <div className="content is-medium has-text-centered">
+                        <p>Thank you for using <strong>⚡ ISP Logger</strong>.</p>
+                        <p> The <strong>free</strong> version is limited to the last 48 hour's results.</p>
+                        <p>To see all your results, use the date filter and remove this banner, please support us by upgrading to PRO</p>
+                        </div>
+                        <div className="has-text-centered">
+                        <Link href="/upgrade">
+                       <button className="button is-primary mt-2 has-text-weight-bold">
+                         Upgrade to Pro
+                       </button>
+                       </Link>
+                          </div>
+                       </div>
+                       }
+                       </>
+                       :
+                       <>
+                       </>
+                     }
                   
                     <div className="has-text-right mx-4 my-4">
                       <DateRangePicker onChange={setRange} value={range} />
                       <br />
-                      <button
-                        onClick={onFilter}
-                        className={`button is-primary mt-2 ${
-                          filterBtn ? "is-loading" : ""
-                        }`}
-                      >
-                        Filter
-                      </button>
+                      
+                      {
+                       state.user_data ?
+                       <>
+                       {
+                         state.user_data.pro ?
+                         <button
+                         onClick={onFilter}
+                         className={`button is-primary mt-2 ${
+                           filterBtn ? "is-loading" : ""
+                         }`}
+                       >
+                         Filter
+                       </button>
+                       :
+                       <Link href="/upgrade">
+                       <button className="button is-primary mt-2">
+                         Upgrade to Pro
+                       </button>
+                       </Link>
+                       }
+                       </>
+                       :
+                       <>
+                       </>
+                     }
+
                     </div>
                     <Chart units={units} data={results} />
                     <ResultsTable units={units} data={results} />
@@ -231,8 +282,7 @@ const Network = ({ networks, cookies, latest }) => {
               collect data.
             </p>
             <p>
-              To get started, install the docker app on a device on the network you
-              want to analyze and enter the
+              To get started, follow check out the <a href="/blog/setup-guide" target="_blank">Setup Guide</a> and enter the
               <code>Network ID</code>.
             </p>
             <p>Please keep it a secret.</p>

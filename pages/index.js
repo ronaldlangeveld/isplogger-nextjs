@@ -15,7 +15,7 @@ const Home = ({ cookies }) => {
       dispatch({ type: "LOGIN", payload: {token: cookies.tkk} });
     }
   }, [cookies]);
-
+ 
   return (
     <>
       <Head>

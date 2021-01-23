@@ -6,6 +6,7 @@ import cookie from "js-cookie";
 import Head from "next/head";
 import Link from "next/link";
 import { validateEmail } from '../utils/validateEmail';
+import LandNav from '../components/landNav';
 
 const Register = () => {
   const history = useRouter();
@@ -78,6 +79,7 @@ const Register = () => {
       <Head>
         <title>Register - ISP Logger</title>
       </Head>
+      <LandNav />
       <section className="section">
         <div className="container">
           <div className="columns is-centered">
