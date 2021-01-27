@@ -5,8 +5,10 @@ class MyDocument extends Document {
         const initialProps = await Document.getInitialProps(ctx)
         return { ...initialProps }
     }
+    
 
     render() {
+        const paddle_keys = { vendor: 1234567, debug: true }
         return (
             <Html>
                 <Head>
@@ -15,10 +17,14 @@ class MyDocument extends Document {
                 <body>
                     <Main />
                     <NextScript />
+                    <script src="https://cdn.paddle.com/paddle/paddle.js"></script> 
+                    <script type="text/javascript" src="/paddle_init.js"></script>
                 </body>
             </Html>
         )
     }
 }
+
+
 
 export default MyDocument

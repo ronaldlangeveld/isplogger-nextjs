@@ -8,7 +8,7 @@ const apiURL = () => {
           //Future, replace with server details
         return `https://isplogger.herokuapp.com/api/`
       }
-} 
+};
 
   const api = axios.create({
     baseURL: apiURL(),

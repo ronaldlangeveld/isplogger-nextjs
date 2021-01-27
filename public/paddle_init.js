@@ -1,0 +1,1 @@
+Paddle.Setup({ vendor: 28795, debug: true });
