@@ -28,6 +28,9 @@ const LandNav = () => {
 
       <div id="navbarBasicExample" className={`navbar-menu ${burger ? 'is-active' : ''}`}>
         <div className="navbar-start">
+        <div className="navbar-item">
+            <Link href="/about"><a className="has-text-weight-bold">About</a></Link>
+          </div>
           <div className="navbar-item">
             <Link href="/blog/setup-guide"><a className="has-text-weight-bold">Setup Guide</a></Link>
           </div>
