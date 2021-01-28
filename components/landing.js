@@ -20,8 +20,10 @@ const Landing = ({ auth }) => {
                   office and servers.
                 </h2>
                 <Link href="/register" className="button is-link has-text-weight-bold is-size-6 ">
-                      <button className="button is-primary has-text-weight-bold is-size-6 ">Get started for free</button>
+                      <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Get started for free*</button>
                     </Link>
+
+                  <p className="help">* Free features limited. Premium billed $12 monthly.</p>
 
                 <br />
                 <p className="mt-4">
