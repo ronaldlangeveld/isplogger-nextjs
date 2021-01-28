@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "ISP Logger Setup Guide"
+title:  "ISP Logger Setup Guide (DRAFT)"
 author: "Ronald Langeveld"
 ---
 
