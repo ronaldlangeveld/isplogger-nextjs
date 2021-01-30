@@ -21,7 +21,6 @@ const Upgrade = () => {
     const {state, dispatch} = useContext(AuthContext);
 
     const router = useRouter();
-
    
 
     const getData = async() => {
@@ -57,75 +56,6 @@ const Upgrade = () => {
                 }
                 })
             };
-
-
-            // const logout = () => {
-            //     cookie.remove('ttk');
-            //     dispatch({ type: 'LOGOUT' });
-            //     history.push('/');
-            
-            //   }
-
-const fakeData = {
-    "checkout": {
-      "created_at": "2021-01-27 08:53:41",
-      "completed": true,
-      "id": "81724832-chrea08ac68bdfb-14922b4636",
-      "coupon": {
-        "coupon_code": null
-      },
-      "passthrough": null,
-      "prices": {
-        "customer": {
-          "currency": "USD",
-          "unit": "0.00",
-          "unit_tax": "0.00",
-          "total": "0.00",
-          "total_tax": "0.00"
-        },
-        "vendor": {
-          "currency": "USD",
-          "unit": "0.00",
-          "unit_tax": "0.00",
-          "total": "0.00",
-          "total_tax": "0.00"
-        }
-      },
-      "redirect_url": null,
-      "test_variant": "newCheckout",
-      "recurring_prices": {
-        "customer": {
-          "currency": "USD",
-          "unit": "0.00",
-          "unit_tax": "0.00",
-          "total": "0.00",
-          "total_tax": "0.00"
-        },
-        "interval": {
-          "length": 1,
-          "type": "year"
-        },
-        "vendor": {
-          "currency": "USD",
-          "unit": "0.00",
-          "unit_tax": "0.00",
-          "total": "0.00",
-          "total_tax": "0.00"
-        }
-      }
-    },
-    "product": {
-      "quantity": 1,
-      "id": 567487,
-      "name": "TESTING ACCOUNT"
-    },
-    "user": {
-      "id": "5488908",
-      "email": "ronaldlangeveld@gmail.com",
-      "country": "ZA"
-    }
-
-  }
 
 
   useEffect(() => {
