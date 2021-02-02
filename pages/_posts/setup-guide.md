@@ -48,3 +48,7 @@ I'm using an old-ish computer, running Ubuntu Server.
 Something like a Raspberry Pi will work just fine as well. As long as it can run docker, you can run it on any device connected to the internet.
 
 The Docker app is Open Source. Feel free to contribute. Contributers will be upgraded to PRO at no cost. 
+
+Known Issues:
+
+- It appears that some users with very fast connections  (120mbps + ) have trouble getting full speed as their results. Busy investigating this, currently it looks like it potentially might be a Docker limitation. Will keep you updated.
