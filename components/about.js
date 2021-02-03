@@ -61,6 +61,10 @@ const AboutComp = ({ auth }) => {
     <p className="title is-1 has-text-centered mt-6">
      And that was the birth of <a className="has-text-link" href="https://www.isplogger.com" target="_blank">ISP Logger</a>
     </p>
+
+    <div className="has-text-centered mt-6">
+        <Link href="/register"><a className=" is-size-4 has-text-link has-text-weight-bold">Sign up now to start monitoring your internet connection today</a></Link>
+    </div>
   </div>
 </section>
 
