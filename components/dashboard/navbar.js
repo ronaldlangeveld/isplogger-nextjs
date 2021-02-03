@@ -40,6 +40,10 @@ const Navbar = () => {
                 <a className="navbar-item">
                   Dashboard
         </a></Link>
+        <Link href="/blog/setup-guide">
+                <a className="navbar-item">
+                  Setup Guide
+        </a></Link>
         </div>
 
         <div className="navbar-end">
