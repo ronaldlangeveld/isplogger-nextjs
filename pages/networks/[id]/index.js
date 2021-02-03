@@ -217,6 +217,7 @@ const Network = ({ networks, cookies, latest }) => {
                         <p>Thank you for using <strong>⚡ ISP Logger</strong>.</p>
                         <p> The <strong>free</strong> version is limited to the last 48 hour's results.</p>
                         <p>To see all your results, use the date filter and remove this banner, please support us by upgrading to PRO</p>
+                        <p className="has-text-centered">Since you're an early adopter, get 50% off when you use coupon code <strong>earlyadopter2021</strong></p>
                         </div>
                         <div className="has-text-centered">
                         <Link href="/upgrade">

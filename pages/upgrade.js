@@ -74,14 +74,17 @@ const Upgrade = () => {
         Upgrade to Pro
       </h1>
         <div className="columns is-centered">
-                <div className="column is-4">
+                <div className="column is-6">
+                <div className="notification is-danger">
+                <p className="has-text-centered">Get 50% off forever when you use coupon code <strong>earlyadopter2021</strong></p>
+              </div>
                     <div className="box">
                         <p className="has-text-centered"><span className="has-text-weight-strong is-size-1">$12</span>/mo</p>
                         <hr/>
-                        <ul className="has-text-centered is-size-3-desktop">
+                        <ul className="has-text-centered is-size-4-desktop">
                         <li>Unlimited dashboard results history</li>
-                        <li>Export Results to JSON and CSV</li>
-                        <li>Weekly Email Reports</li>
+                        <li>Export Results to JSON and CSV <span className="tag is-primary">Soon</span></li>
+                        <li>Weekly Email Reports <span className="tag is-primary">Soon</span></li>
                         <li>Email Support</li>
                         </ul>
                         <hr/>
