@@ -1,8 +1,37 @@
 import Image from 'next/image';
 import LandNav from './landNav';
 import Link from 'next/link';
-
+import {useEffect, useState} from 'react';
+import API from '../utils/Api';
 const Landing = ({ auth }) => {
+
+
+  var initialData = {
+    tests: 0,
+    download: 0,
+    upload: 0,
+    networks: 0
+  }
+
+
+  const [stats, setStats] = useState(initialData)
+
+useEffect(() => {
+  API.get('open-stats/').then((res)=> {
+    var data = res.data;
+    setStats({
+      ...stats,
+      tests: data.tests,
+      download: data.download,
+      upload: data.upload,
+      networks: data.networks
+    })
+  }, (err) => {
+    console.log(err)
+  })
+
+}, [])
+
   return (
     <>
      <LandNav />
@@ -38,6 +67,15 @@ const Landing = ({ auth }) => {
                 <img src="/speed_test.svg" alt="speed_test_img" />
               </div>
             </div>
+            <div className="has-text-left">
+            <p className="title">Live stats from the cloud</p>
+            <ul>
+              <li><strong>{stats.tests}</strong> tests logged</li>
+              <li><strong>{parseFloat(stats.download / 1000000).toFixed(2)} mbps </strong>is the fastest download speed logged so far</li>
+              <li><strong>{parseFloat(stats.upload / 1000000).toFixed(2)} mbps </strong>is the fastest upload speed logged so far</li>
+              <li><strong>{stats.networks}</strong> networks are currently being monitored by ISP Logger</li>
+            </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -55,6 +93,7 @@ const Landing = ({ auth }) => {
 
         </div>
       </section>
+
 
       <footer className="footer">
   <div className="content has-text-centered">
