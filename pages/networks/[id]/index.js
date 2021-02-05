@@ -114,7 +114,7 @@ const Network = ({ networks, cookies, latest }) => {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [state]);
 
   const onFilter = () => {
     if (range[0] > new Date() && range[1] > new Date()) {

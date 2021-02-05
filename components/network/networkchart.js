@@ -56,7 +56,7 @@ const Chart = ({ units, data }) => {
     setPing(lat)
     setTime(timestamp)
 
-  }), [units, data];
+  },[units, data]);
 
   const options = {
     responsive: true,
