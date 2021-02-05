@@ -35,7 +35,10 @@ useEffect(() => {
   return (
     <>
      <LandNav />
-      <section className="hero is-white is-large is-bold">
+
+      <section className="hero is-white is-medium is-bold">
+      <div className="notification is-primary mb-6"><p className="has-text-centered has-text-weight-bold is-size-5">I'm live on Product Hunt! <a href="https://www.producthunt.com/posts/isp-logger" target="_blank">Join the conversation</a></p></div>
+
         <div className="hero-body">
           <div className="container">
             <div className="columns">

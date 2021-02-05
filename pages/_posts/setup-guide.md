@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "ISP Logger Setup Guide (DRAFT)"
+title:  "ISP Logger Setup Guide"
 author: "Ronald Langeveld"
 ---
 
@@ -10,7 +10,7 @@ ISP LOGGER
 
 Thank you for your interest in ISP Logger.
   
-The project is still heavily work in progress, however this is the first beta version.
+The project is still heavily work in progress, however this is the first beta version, so this documentation will most certainly change at some point.
 
 What you need:
  

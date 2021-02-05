@@ -3,7 +3,6 @@ import matter from 'gray-matter';
 import LandNav from '../../components/landNav';
 import ReactMarkdown from 'react-markdown';
 import Head from 'next/head';
-// import OK from '../../_posts/${slug}.md'
 
 const BlogPost = ({content, data}) => {
 
@@ -20,7 +19,7 @@ const BlogPost = ({content, data}) => {
       <section className="section">
              <div className="container">
                 <div className="columns is-centered">
-                    <div className="column is-7">
+                    <div className="column is-8">
                     <h1 className="title has-text-centered">{frontmatter.title}</h1>
                     <div className="content is-medium is-size-6-mobile">
                         <ReactMarkdown source={content} />

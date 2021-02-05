@@ -14,9 +14,6 @@ const LandNav = () => {
 
   return (
     <>
-    <div className="notification is-danger">
-    <p className="has-text-centered has-text-weight-bold">👋🏻 Hi! Please update the Docker Image to the latest version to get them going again. <Link href="/blog/setup-guide/">Simply follow the instructions used to get it going first time</Link></p>
-    </div>
     <nav className="navbar is-light is-spaced" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <Link href="/">
