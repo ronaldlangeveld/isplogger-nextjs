@@ -315,7 +315,7 @@ export async function getServerSideProps(context) {
   } catch (err) {
     if (context.res) {
       context.res.writeHead(302, {
-        Location: "/login",
+        Location: "/404",
       });
       context.res.end();
     }
