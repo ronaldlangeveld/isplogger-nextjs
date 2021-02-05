@@ -24,7 +24,7 @@ For simplicity, run this project on [Docker](https://www.docker.com/products/doc
 
 In future we'll have an easy to use executable app with GUI to make it as user friendly as possible for all users. 
 
-It's been tested on MacOS, Linux and Windows where it runs without issues.  
+It's been tested on MacOS, Linux and Windows where it runs smoothly.  
 
 Type the following in your Terminal (Linux & MacOS) or Command Prompt (Windows)
 
