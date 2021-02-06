@@ -16,10 +16,11 @@ import "react-calendar/dist/Calendar.css";
 import ResultsTable from '../../../components/network/resultsTable';
 import NetworkIdModal from '../../../components/network/networkIdModal';
 import moment from "moment";
-import {AuthContext} from '../../../context/Auth';
+import { AuthContext } from '../../../context/Auth';
+import ExportModal from '../../../components/network/exportModal';
 
 const Network = ({ networks, cookies, latest }) => {
-  const {state} = useContext(AuthContext);
+  const { state } = useContext(AuthContext);
   const [networkInfo, setNetworkInfo] = useState(networks || null);
   const [latestTest, setLatest] = useState(latest || null);
   const [results, setResults] = useState(null);
@@ -27,10 +28,11 @@ const Network = ({ networks, cookies, latest }) => {
   const today = new Date();
   const yesterday = new Date(today);
 
-  const [range, setRange] = useState([yesterday.setDate(yesterday.getDate()-2), new Date()]);
+  const [range, setRange] = useState([yesterday.setDate(yesterday.getDate() - 2), new Date()]);
   const [filterBtn, setFilterBtn] = useState(false);
 
   const [idModal, setIdModal] = useState(false);
+  const [dlModal, setdlModal] = useState(false);
 
   const speedunits = [
     {
@@ -62,7 +64,7 @@ const Network = ({ networks, cookies, latest }) => {
     conversion: 1000000,
   });
 
-  useEffect(() => {}, [units]);
+  useEffect(() => { }, [units]);
 
   const onChangeSpeeds = (e) => {
     console.log(e.target.value);
@@ -103,10 +105,10 @@ const Network = ({ networks, cookies, latest }) => {
     GetData();
     try {
       const speedKey = cookie.get("speed");
-      if(speedKey){
+      if (speedKey) {
         const speedval = speeds[speedKey];
-      console.log(speedval);
-      setUnits(speedval);
+        console.log(speedval);
+        setUnits(speedval);
       } else {
         const speedval = speeds[2];
         setUnits(speedval)
@@ -147,6 +149,11 @@ const Network = ({ networks, cookies, latest }) => {
     setIdModal(!idModal);
   };
 
+  const toggleDlModal = () => {
+    setdlModal(!dlModal);
+  };
+
+
   return (
     <Layout>
       <Head>
@@ -178,19 +185,22 @@ const Network = ({ networks, cookies, latest }) => {
               </h1>
               <p className="mb-6 has-text-centered ">
                 <code onClick={toggleNetModal} className="is-clickable">Click to see the Network ID</code>
-                <NetworkIdModal active={idModal} secret={networkInfo.secret} toggle={toggleNetModal}  />
               </p>
+              <NetworkIdModal active={idModal} secret={networkInfo.secret} toggle={toggleNetModal} />
               {latest !== null ? (
-                <LatestCard units={units} data={latest} />
-              ) : (
                 <>
+                  <LatestCard units={units} data={latest} />
+
                 </>
-              )}
+              ) : (
+                  <>
+                  </>
+                )}
             </div>
           </div>
         </div>
       </section>
-      <hr/>
+      <hr />
       {latest ? (
         <>
           {loading ? (
@@ -198,98 +208,104 @@ const Network = ({ networks, cookies, latest }) => {
               <ClipLoader size={50} color={"#123abc"} loading={true} />
             </div>
           ) : (
-            <section>
-            
-              <div className="container">
-                {results.length > 0 && results !== null ? (
-                  <>
+              <section>
 
-{
-                       state.user_data ?
-                       <>
-                       {
-                         state.user_data.pro ?
-                         <>
-                         </>
-                       :
-                       <div className="notification is-link">
-                        <div className="content is-medium has-text-centered">
-                        <p>Thank you for using <strong>⚡ ISP Logger</strong>.</p>
-                        <p> The <strong>free</strong> version is limited to the last 48 hour's results.</p>
-                        <p>To see all your results, use the date filter and remove this banner, please support us by upgrading to PRO</p>
-                        <p className="has-text-centered">Since you're an early adopter, get 50% off when you use coupon code <strong>earlyadopter2021</strong></p>
-                        </div>
-                        <div className="has-text-centered">
-                        <Link href="/upgrade">
-                       <button className="button is-primary mt-2 has-text-weight-bold">
-                         Upgrade to Pro
-                       </button>
-                       </Link>
-                          </div>
-                       </div>
-                       }
-                       </>
-                       :
-                       <>
-                       </>
-                     }
-                  
-                    <div className="has-text-right mx-4 my-4">
-                      <DateRangePicker onChange={setRange} value={range} />
-                      <br />
-                      
+                <div className="container">
+                  {results.length > 0 && results !== null ? (
+                    <>
+
                       {
-                       state.user_data ?
-                       <>
-                       {
-                         state.user_data.pro ?
-                         <button
-                         onClick={onFilter}
-                         className={`button is-primary mt-2 ${
-                           filterBtn ? "is-loading" : ""
-                         }`}
-                       >
-                         Filter
-                       </button>
-                       :
-                       <Link href="/upgrade">
-                       <button className="button is-primary mt-2">
-                         Upgrade to Pro
-                       </button>
-                       </Link>
-                       }
-                       </>
-                       :
-                       <>
-                       </>
-                     }
+                        state.user_data ?
+                          <>
+                            {
+                              state.user_data.pro ?
+                                <>
+                                  <div className="mt-4">
+                                    <p onClick={toggleDlModal} className="has-text-link is-clickable has-text-right">Export Data</p>
+                                    <ExportModal active={dlModal} secret={networkInfo.secret} toggle={toggleDlModal} token={state.token} />
+                                  </div>
 
-                    </div>
-                    <Chart units={units} data={results} />
-                    <ResultsTable units={units} data={results} />
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </section>
-          )}
+                                </>
+                                :
+                                <div className="notification is-link">
+                                  <div className="content is-medium has-text-centered">
+                                    <p>Thank you for using <strong>⚡ ISP Logger</strong>.</p>
+                                    <p> The <strong>free</strong> version is limited to the last 48 hour's results.</p>
+                                    <p>To see all your results, use the date filter and remove this banner, please support us by upgrading to PRO</p>
+                                    <p className="has-text-centered">Since you're an early adopter, get 50% off when you use coupon code <strong>earlyadopter2021</strong></p>
+                                  </div>
+                                  <div className="has-text-centered">
+                                    <Link href="/upgrade">
+                                      <button className="button is-primary mt-2 has-text-weight-bold">
+                                        Upgrade to Pro
+                       </button>
+                                    </Link>
+                                  </div>
+                                </div>
+                            }
+                          </>
+                          :
+                          <>
+                          </>
+                      }
+
+                      <div className="has-text-right mx-4 my-4">
+                        <br />
+                        <DateRangePicker onChange={setRange} value={range} />
+                        <br />
+
+                        {
+                          state.user_data ?
+                            <>
+                              {
+                                state.user_data.pro ?
+                                  <button
+                                    onClick={onFilter}
+                                    className={`button is-primary mt-2 ${filterBtn ? "is-loading" : ""
+                                      }`}
+                                  >
+                                    Filter
+                       </button>
+                                  :
+                                  <Link href="/upgrade">
+                                    <button className="button is-primary mt-2">
+                                      Upgrade to Pro
+                       </button>
+                                  </Link>
+                              }
+                            </>
+                            :
+                            <>
+                            </>
+                        }
+
+                      </div>
+                      <Chart units={units} data={results} />
+
+                      <ResultsTable units={units} data={results} />
+                    </>
+                  ) : (
+                      <></>
+                    )}
+                </div>
+              </section>
+            )}
         </>
       ) : (
-        <>
-          <div className="content has-text-centered">
-            <p>
-              Looks like you haven't configured a device on this network to
-              collect data.
+          <>
+            <div className="content has-text-centered">
+              <p>
+                Looks like you haven't configured a device on this network to
+                collect data.
             </p>
-            <p>
-              To get started, follow check out the <a href="/blog/setup-guide" target="_blank">Setup Guide</a> and enter the
+              <p>
+                To get started, follow check out the <a href="/blog/setup-guide" target="_blank">Setup Guide</a> and enter the
               <code>Network ID</code>.
             </p>
-            <p>Please keep it a secret.</p>
-          </div>
-        </>
-      )}
+              <p>Please keep it a secret.</p>
+            </div>
+          </>
+        )}
     </Layout>
   );
 };

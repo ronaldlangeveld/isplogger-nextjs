@@ -12,7 +12,7 @@ const ResultsTable = ({ units, data }) => {
   return (
     <>
       {tbData !== null ? (
-        <table class="table is-fullwidth has-text-centered mt-4">
+        <table className="table is-fullwidth has-text-centered mt-4">
           <thead>
             <tr>
               <th>Timestamp</th>
