@@ -3,6 +3,7 @@ import matter from 'gray-matter';
 import LandNav from '../../components/landNav';
 import ReactMarkdown from 'react-markdown';
 import Head from 'next/head';
+import Footer from '../../components/footer';
 
 const BlogPost = ({content, data}) => {
 
@@ -28,6 +29,8 @@ const BlogPost = ({content, data}) => {
                 </div>
              </div>
          </section>
+
+         <Footer/>
 
         </>
     )

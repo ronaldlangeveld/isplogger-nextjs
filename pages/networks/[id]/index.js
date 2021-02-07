@@ -18,7 +18,8 @@ import NetworkIdModal from '../../../components/network/networkIdModal';
 import moment from "moment";
 import { AuthContext } from '../../../context/Auth';
 import ExportModal from '../../../components/network/exportModal';
-import {Grading} from '../../../components/network/grading';
+import { Grading } from '../../../components/network/grading';
+import GoPro from '../../../components/gopro';
 
 const Network = ({ networks, cookies, latest }) => {
   const { state } = useContext(AuthContext);
@@ -70,15 +71,15 @@ const Network = ({ networks, cookies, latest }) => {
 
   useEffect(() => {
 
-    if(networks.upload_service !== null && networks.download_service !== null && latest.avg_up && latest.avg_up && networks.upload_service !== 0 && networks.download_service !== 0 ){
-    var maxUp = networks.upload_service;
-    var maxDown = networks.download_service;
-    var avgUp = latest.avg_up;
-    var avgDown = latest.avg_down;
+    if (networks.upload_service !== null && networks.download_service !== null && latest.avg_up && latest.avg_up && networks.upload_service !== 0 && networks.download_service !== 0) {
+      var maxUp = networks.upload_service;
+      var maxDown = networks.download_service;
+      var avgUp = latest.avg_up;
+      var avgDown = latest.avg_down;
 
-    // maxUp, maxDown, avgUp, avgDown
-    const g = Grading(maxUp, maxDown, avgUp, avgDown);
-    setGrade(g)
+      // maxUp, maxDown, avgUp, avgDown
+      const g = Grading(maxUp, maxDown, avgUp, avgDown);
+      setGrade(g)
     }
 
   }, [networks, latest])
@@ -169,7 +170,15 @@ const Network = ({ networks, cookies, latest }) => {
   };
 
   const toggleDlModal = () => {
-    setdlModal(!dlModal);
+    console.log(results.length);
+    if(state.user_data.pro !== true){
+      router.push('/upgrade');
+    }
+    if(results.length === 0 || results === null){
+     alert('Oops, you need to perform some tests first before you can export results.')
+    } else {
+      setdlModal(!dlModal);
+    }
   };
 
 
@@ -185,28 +194,37 @@ const Network = ({ networks, cookies, latest }) => {
           <div className="columns is-centered">
             <div className="column is-8">
               <nav className="level">
-                  <div className="level-left">
-                      <div className="level-item">
-                        <Link href={`/networks/${id}/settings`}>Settings</Link>
-                      </div>
+                <div className="level-left">
+                  <div className="level-item">
+                    <Link href={`/networks/${id}/settings`}><span className="is-size-6 has-text-weight-bold has-text-link is-clickable">Settings</span></Link> <span className="ml-3 mb-3 tag is-primary is-size-7">New</span>
                   </div>
-                  <div className="level-right">
-                      <div className="level-item">
-                      <div className="field">
-                  <div className="control">
-                    <div className="select">
-                      <select onChange={onChangeSpeeds} value={units.key}>
-                        {speeds.map((item, index) => (
-                          <option key={index} value={index}>
-                            {item.unit}
-                          </option>
-                        ))}
-                      </select>
+                  <div className="level-item">
+                 <span onClick={toggleDlModal} className="is-size-6 has-text-weight-bold has-text-link is-clickable">Export Data</span> <span className="ml-3 mb-3 tag is-primary is-size-7">New</span>
+                  </div>
+                  {/* <div className="level-item">
+
+                    <span onClick={toggleDlModal} className="is-size-6 has-text-weight-bold has-text-link is-clickable">Export Data <span className="ml-3 mb-3 tag is-primary is-size-7">New</span></span>
+
+
+                  </div> */}
+                </div>
+                <div className="level-right">
+                  <div className="level-item">
+                    <div className="field">
+                      <div className="control">
+                        <div className="select">
+                          <select onChange={onChangeSpeeds} value={units.key}>
+                            {speeds.map((item, index) => (
+                              <option key={index} value={index}>
+                                {item.unit}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-                      </div>
-                  </div>
               </nav>
 
               <h1 className="subtitle is-4 has-text-centered">
@@ -248,28 +266,11 @@ const Network = ({ networks, cookies, latest }) => {
                             {
                               state.user_data.pro ?
                                 <>
-                                  <div className="mt-4">
-                                    <p onClick={toggleDlModal} className="has-text-link is-clickable has-text-right">Export Data</p>
-                                    <ExportModal active={dlModal} secret={networkInfo.secret} toggle={toggleDlModal} token={state.token} />
-                                  </div>
+                                  <ExportModal active={dlModal} secret={networkInfo.secret} toggle={toggleDlModal} token={state.token} />
 
                                 </>
                                 :
-                                <div className="notification is-link">
-                                  <div className="content is-medium has-text-centered">
-                                    <p>Thank you for using <strong>⚡ ISP Logger</strong>.</p>
-                                    <p> The <strong>free</strong> version is limited to the last 48 results.</p>
-                                    <p>To see all your results and export results, use the date filter and remove this banner, please support us by upgrading to PRO</p>
-                                    <p className="has-text-centered">Since you're an early adopter, get 50% off when you use coupon code <strong>earlyadopter2021</strong></p>
-                                  </div>
-                                  <div className="has-text-centered">
-                                    <Link href="/upgrade">
-                                      <button className="button is-primary mt-2 has-text-weight-bold">
-                                        Upgrade to Pro
-                                      </button>
-                                    </Link>
-                                  </div>
-                                </div>
+                               <GoPro/>
                             }
                           </>
                           :

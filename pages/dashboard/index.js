@@ -6,6 +6,7 @@ import { parseCookies } from "../../utils/parseCookies";
 import OnBoardModal from "../../components/dashboard/onBoardModal";
 import Head from "next/head";
 import Link from 'next/link';
+import GoPro from "../../components/gopro";
 
 const Dashboard = ({ networks }) => {
   const [networkList, setNetworkList] = useState(networks || null);
@@ -24,8 +25,10 @@ const Dashboard = ({ networks }) => {
       </Head>
       <section className="section">
         <div className="container">
+     
           <div className="columns is-centered">
-            <div className="column is-8">
+            <div className="column is-10">
+       
               {networkList !== null && networkList.length > 0 ? (
                 <>
                 <nav className="level is-mobile">
@@ -42,7 +45,7 @@ const Dashboard = ({ networks }) => {
 
                 </nav>
 
-             
+              
                   {networkList.map((item, index) => (
                     <Card key={index} data={item} />
                   ))}
@@ -59,6 +62,9 @@ const Dashboard = ({ networks }) => {
                  
                 </>
               )}
+                   <div className="mt-6">
+                   <GoPro />
+                   </div>
             </div>
           </div>
         </div>

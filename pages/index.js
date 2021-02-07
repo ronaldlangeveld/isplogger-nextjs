@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import { parseCookies } from "../utils/parseCookies";
 import Head from "next/head";
 import Landing from '../components/landing';
+import Footer from '../components/footer';
 
 
 const Home = ({ cookies }) => {
@@ -34,6 +35,7 @@ const Home = ({ cookies }) => {
 <meta property="twitter:image" content="https://isplogger.com/results.png"/>
       </Head>
     <Landing auth={state}/>
+    <Footer/>
     </>
   );
 };

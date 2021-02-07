@@ -36,8 +36,8 @@ useEffect(() => {
     <>
      <LandNav />
 
-      <section className="hero is-white is-medium is-bold">
-      <div className="notification is-primary mb-6"><p className="has-text-centered has-text-weight-bold is-size-5">I'm live on Product Hunt! <a href="https://www.producthunt.com/posts/isp-logger" target="_blank">Join the conversation</a></p></div>
+      <section className="hero is-white is-large is-bold">
+      {/* <div className="notification is-primary mb-6"><p className="has-text-centered has-text-weight-bold is-size-5">I'm live on Product Hunt! <a href="https://www.producthunt.com/posts/isp-logger" target="_blank">Join the conversation</a></p></div> */}
 
         <div className="hero-body">
           <div className="container">
@@ -52,10 +52,10 @@ useEffect(() => {
                   office and servers.
                 </h2>
                 <Link href="/register" className="button is-link has-text-weight-bold is-size-6 ">
-                      <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Get started for free*</button>
+                      <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Join now</button>
                     </Link>
 
-                  <p className="help">* Free features limited. Premium billed $12 monthly.</p>
+                  {/* <p className="help">* Free features limited. Premium billed $12 monthly.</p> */}
 
                 <br />
                 <p className="mt-4">
@@ -65,12 +65,7 @@ useEffect(() => {
                   Analyze performance on a cloud based dashboard, accessible
                   from anywhere.
                 </p>
-              </div>
-              <div className="column">
-                <img src="/speed_test.svg" alt="speed_test_img" />
-              </div>
-            </div>
-            <div className="has-text-left">
+                <div className="has-text-left mt-6">
             <p className="title">Live stats from the cloud</p>
             <ul>
               <li><strong>{stats.tests}</strong> tests logged</li>
@@ -79,6 +74,12 @@ useEffect(() => {
               <li><strong>{stats.networks}</strong> networks are currently being monitored by ISP Logger</li>
             </ul>
             </div>
+              </div>
+              <div className="column is-hidden-mobile">
+                <img src="/speed_test.svg" alt="speed_test_img" />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -96,17 +97,6 @@ useEffect(() => {
 
         </div>
       </section>
-
-
-      <footer className="footer">
-  <div className="content has-text-centered">
-    <p>
-      <strong>ISP Logger</strong> by <a href="https://www.ronaldlangeveld.com" target="_blank">Ronald Langeveld</a>
-      <p>Copyright © 2021 ISP Logger</p>
-
-    </p>
-  </div>
-</footer>
     
     </>
   );

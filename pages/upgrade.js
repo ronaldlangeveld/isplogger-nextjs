@@ -70,14 +70,17 @@ const Upgrade = () => {
             <section className="hero">
   <div className="hero-body">
     <div className="container">
-      <h1 className="title has-text-centered">
+
+        <div className="columns is-centered">
+        <div className="column is-6">
+        <h1 className="title has-text-centered">
         Upgrade to Pro
       </h1>
-        <div className="columns is-centered">
-                <div className="column is-6">
-                <div className="notification is-danger">
+        <img src="/heart.svg" />
+
+                {/* <div className="notification is-danger">
                 <p className="has-text-centered">Get 50% off forever when you use coupon code <strong>earlyadopter2021</strong></p>
-              </div>
+              </div> */}
                     <div className="box">
                         <p className="has-text-centered"><span className="has-text-weight-strong is-size-1">$12</span>/mo</p>
                         <hr/>
@@ -93,6 +96,7 @@ const Upgrade = () => {
                        </div>
                     </div>
                 </div>
+               
         </div>
     </div>
   </div>

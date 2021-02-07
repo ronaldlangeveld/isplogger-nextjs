@@ -84,9 +84,7 @@ const Register = () => {
         <div className="container">
           <div className="columns is-centered">
             <div className="column is-6">
-              <div className="notification is-danger">
-                <p className="has-text-centered">Get 50% off forever when you use coupon code <strong>earlyadopter2021</strong></p>
-              </div>
+ 
               <div className="card">
                 <div className="card-content">
                   <h1 className="is-4 title">⚡ ISP Logger</h1>
