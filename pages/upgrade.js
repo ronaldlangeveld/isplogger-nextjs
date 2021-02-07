@@ -86,7 +86,7 @@ const Upgrade = () => {
                         <hr/>
                         <ul className="has-text-centered is-size-4-desktop">
                         <li>Unlimited dashboard results history</li>
-                        <li>Export Results to JSON and CSV <span className="tag is-primary">Soon</span></li>
+                        <li>Export Results to JSON and CSV</li>
                         <li>Weekly Email Reports <span className="tag is-primary">Soon</span></li>
                         <li>Email Support</li>
                         </ul>
