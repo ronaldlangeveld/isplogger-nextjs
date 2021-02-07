@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Layout from "../../components/authlayout";
 import Card from "../../components/dashboard/dashCards";
 import api from "../../utils/Api";
@@ -7,10 +7,12 @@ import OnBoardModal from "../../components/dashboard/onBoardModal";
 import Head from "next/head";
 import Link from 'next/link';
 import GoPro from "../../components/gopro";
+import {AuthContext} from '../../context/Auth';
 
 const Dashboard = ({ networks }) => {
   const [networkList, setNetworkList] = useState(networks || null);
   const [modal, setModal] = useState(false);
+  const {state, dispatch} = useContext(AuthContext);
 
   useEffect(() => {
     if(networkList === null || networkList.length  === 0 ){
@@ -62,9 +64,21 @@ const Dashboard = ({ networks }) => {
                  
                 </>
               )}
-                   <div className="mt-6">
+                   {
+                     state.user_data ?
+                     state.user_data.pro ?
+                      <>
+                      </>
+                   :
+                   <>
+                                       <div className="mt-6">
                    <GoPro />
                    </div>
+                   </>
+                   :
+                   <>
+                   </>
+                   }
             </div>
           </div>
         </div>
