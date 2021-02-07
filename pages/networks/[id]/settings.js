@@ -56,8 +56,9 @@ const NetworkSettings = ({ initData, cookies }) => {
             headers: { Authorization: `Token ${cookies.ttk}` },
         }).then((res) => {
             console.log(res);
+            alert("Save success")
         }, (err) => {
-            console.log(err);
+            alert("Oops, something went wrong. ")
         });
     };
 
