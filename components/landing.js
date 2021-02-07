@@ -45,7 +45,7 @@ useEffect(() => {
               <div className="column is-8">
                 <span className="tag is-info mb-3">Beta</span>
                 <h1 className="title is-1 is-size-3-mobile">
-                  Keep track of your internet performance.
+                  Keep track of your internet speed.
                 </h1>
                 <h2 className="subtitle is-3 is-size-5-mobile">
                   Automated internet speed logger for your connection at home,

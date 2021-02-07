@@ -165,8 +165,15 @@ const Network = ({ networks, cookies, latest }) => {
         <div className="container">
           <div className="columns is-centered">
             <div className="column is-8">
-              <div className="has-text-right">
-                <div className="field">
+              <nav className="level">
+                  <div className="level-left">
+                      <div className="level-item">
+                        <Link href={`/networks/${id}/settings`}>Settings</Link>
+                      </div>
+                  </div>
+                  <div className="level-right">
+                      <div className="level-item">
+                      <div className="field">
                   <div className="control">
                     <div className="select">
                       <select onChange={onChangeSpeeds} value={units.key}>
@@ -179,7 +186,10 @@ const Network = ({ networks, cookies, latest }) => {
                     </div>
                   </div>
                 </div>
-              </div>
+                      </div>
+                  </div>
+              </nav>
+
               <h1 className="subtitle is-4 has-text-centered">
                 Network Analytics for <strong>{networkInfo.name}</strong>
               </h1>
@@ -190,7 +200,6 @@ const Network = ({ networks, cookies, latest }) => {
               {latest !== null ? (
                 <>
                   <LatestCard units={units} data={latest} />
-
                 </>
               ) : (
                   <>
@@ -230,15 +239,15 @@ const Network = ({ networks, cookies, latest }) => {
                                 <div className="notification is-link">
                                   <div className="content is-medium has-text-centered">
                                     <p>Thank you for using <strong>⚡ ISP Logger</strong>.</p>
-                                    <p> The <strong>free</strong> version is limited to the last 48 hour's results.</p>
-                                    <p>To see all your results, use the date filter and remove this banner, please support us by upgrading to PRO</p>
+                                    <p> The <strong>free</strong> version is limited to the last 48 results.</p>
+                                    <p>To see all your results and export results, use the date filter and remove this banner, please support us by upgrading to PRO</p>
                                     <p className="has-text-centered">Since you're an early adopter, get 50% off when you use coupon code <strong>earlyadopter2021</strong></p>
                                   </div>
                                   <div className="has-text-centered">
                                     <Link href="/upgrade">
                                       <button className="button is-primary mt-2 has-text-weight-bold">
                                         Upgrade to Pro
-                       </button>
+                                      </button>
                                     </Link>
                                   </div>
                                 </div>
@@ -326,6 +335,7 @@ export async function getServerSideProps(context) {
         networks,
         latest,
         cookies,
+        id
       },
     };
   } catch (err) {

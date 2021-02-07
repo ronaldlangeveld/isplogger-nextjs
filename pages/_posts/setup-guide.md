@@ -10,7 +10,7 @@ ISP LOGGER
 
 Thank you for your interest in ISP Logger.
   
-The project is still heavily work in progress, however this is the first beta version, so this documentation will most certainly change at some point.
+The project is still heavily work in progress, however this is the first beta version, so this documentation will most certainly all the time.
 
 What you need:
  
@@ -51,4 +51,4 @@ The Docker app is Open Source. Feel free to contribute. Contributers will be upg
 
 Known Issues:
 
-- It appears that some users with very fast connections  (120mbps + ) have trouble getting full speed as their results. Busy investigating this, currently it looks like it potentially might be a Docker limitation. Will keep you updated.
+- It appears that some users with very fast connections  (120mbps + ) have trouble getting full speed as their results. Busy investigating this, currently it looks like it potentially might be a Docker limitation. Will keep you updated. Advanced users, setup the script to run the [python code directly](https://github.com/ronaldlangeveld/isplogger_server).
