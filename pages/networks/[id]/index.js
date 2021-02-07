@@ -18,6 +18,7 @@ import NetworkIdModal from '../../../components/network/networkIdModal';
 import moment from "moment";
 import { AuthContext } from '../../../context/Auth';
 import ExportModal from '../../../components/network/exportModal';
+import {Grading} from '../../../components/network/grading';
 
 const Network = ({ networks, cookies, latest }) => {
   const { state } = useContext(AuthContext);
@@ -33,6 +34,8 @@ const Network = ({ networks, cookies, latest }) => {
 
   const [idModal, setIdModal] = useState(false);
   const [dlModal, setdlModal] = useState(false);
+
+  const [grade, setGrade] = useState(null);
 
   const speedunits = [
     {
@@ -56,6 +59,7 @@ const Network = ({ networks, cookies, latest }) => {
       conversion: 1000000000,
     },
   ];
+
   const [speeds, setSpeeds] = useState(speedunits || "");
 
   const [units, setUnits] = useState({
@@ -63,6 +67,21 @@ const Network = ({ networks, cookies, latest }) => {
     unit: "Mbps",
     conversion: 1000000,
   });
+
+  useEffect(() => {
+
+    if(networks.upload_service !== null && networks.download_service !== null && latest.avg_up && latest.avg_up && networks.upload_service !== 0 && networks.download_service !== 0 ){
+    var maxUp = networks.upload_service;
+    var maxDown = networks.download_service;
+    var avgUp = latest.avg_up;
+    var avgDown = latest.avg_down;
+
+    // maxUp, maxDown, avgUp, avgDown
+    const g = Grading(maxUp, maxDown, avgUp, avgDown);
+    setGrade(g)
+    }
+
+  }, [networks, latest])
 
   useEffect(() => { }, [units]);
 
@@ -199,7 +218,7 @@ const Network = ({ networks, cookies, latest }) => {
               <NetworkIdModal active={idModal} secret={networkInfo.secret} toggle={toggleNetModal} />
               {latest !== null ? (
                 <>
-                  <LatestCard units={units} data={latest} />
+                  <LatestCard units={units} data={latest} grade={grade} />
                 </>
               ) : (
                   <>
