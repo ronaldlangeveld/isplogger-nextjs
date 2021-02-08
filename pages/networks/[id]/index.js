@@ -71,7 +71,7 @@ const Network = ({ networks, cookies, latest }) => {
 
   useEffect(() => {
 
-    if (networks.upload_service !== null && networks.download_service !== null && latest.avg_up && latest.avg_up && networks.upload_service !== 0 && networks.download_service !== 0) {
+    if (networks.upload_service !== null && networks.download_service !== null && latest && networks.upload_service !== 0 && networks.download_service !== 0) {
       var maxUp = networks.upload_service;
       var maxDown = networks.download_service;
       var avgUp = latest.avg_up;
