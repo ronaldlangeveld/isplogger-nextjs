@@ -49,7 +49,7 @@ const Home = ({ cookies, provs }) => {
   <div class="hero-body">
     <div className="container">
     <p class="title">
-      ISP's monitored by users using ISP Logger
+      ISP's monitored by users speed testing using ISP Logger
     </p>
     <div className="columns is-centered is-multiline">
             {
