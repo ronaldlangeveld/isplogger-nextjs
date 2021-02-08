@@ -36,7 +36,7 @@ useEffect(() => {
     <>
      <LandNav />
 
-      <section className="hero is-white is-large is-bold">
+      <section className="hero is-white is-medium is-bold">
       {/* <div className="notification is-primary mb-6"><p className="has-text-centered has-text-weight-bold is-size-5">I'm live on Product Hunt! <a href="https://www.producthunt.com/posts/isp-logger" target="_blank">Join the conversation</a></p></div> */}
 
         <div className="hero-body">
@@ -52,8 +52,10 @@ useEffect(() => {
                   office and servers.
                 </h2>
                 <Link href="/register" className="button is-link has-text-weight-bold is-size-6 ">
-                      <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Join now</button>
+                      <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Try for free. No credit card required</button>
+                    
                     </Link>
+               
 
                   {/* <p className="help">* Free features limited. Premium billed $12 monthly.</p> */}
 

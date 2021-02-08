@@ -46,12 +46,12 @@ const LandNav = () => {
             <div className="buttons">
               <Link href="/register">
                 <a className="button is-primary">
-                  <strong>Join</strong>
+                  <strong>Sign up</strong>
                 </a>
               </Link>
               <Link href="/login">
                 <a className="button is-light">
-                  Log in
+                  Sign in
               </a>
               </Link>
             </div>
