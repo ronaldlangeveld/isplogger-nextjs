@@ -72,10 +72,10 @@ const Network = ({ networks, cookies, latest }) => {
   useEffect(() => {
 
     if (networks.upload_service !== null && networks.download_service !== null && latest && networks.upload_service !== 0 && networks.download_service !== 0) {
-      var maxUp = networks.upload_service;
-      var maxDown = networks.download_service;
-      var avgUp = latest.avg_up;
-      var avgDown = latest.avg_down;
+      var maxUp = networks.upload_service || 0;
+      var maxDown = networks.download_service || 0;
+      var avgUp = latest.avg_up || 0;
+      var avgDown = latest.avg_down || 0;
 
       // maxUp, maxDown, avgUp, avgDown
       const g = Grading(maxUp, maxDown, avgUp, avgDown);
@@ -232,6 +232,8 @@ const Network = ({ networks, cookies, latest }) => {
               </h1>
               <p className="mb-6 has-text-centered ">
                 <code onClick={toggleNetModal} className="is-clickable">Click to see the Network ID</code>
+                {/* <br/>
+                <a target="_blank" href={`/networks/${id}/test`} className="mt-4 button is-primary">Test now</a> */}
               </p>
               <NetworkIdModal active={idModal} secret={networkInfo.secret} toggle={toggleNetModal} />
               {latest !== null ? (
