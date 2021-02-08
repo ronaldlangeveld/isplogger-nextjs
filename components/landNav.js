@@ -35,6 +35,9 @@ const LandNav = () => {
           <div className="navbar-item">
             <Link href="/blog/setup-guide"><a className="has-text-weight-bold">Setup Guide</a></Link>
           </div>
+          <div className="navbar-item">
+            <Link href="/providers"><a className="has-text-weight-bold">ISP's</a></Link>
+          </div>
         </div>
 
         <div className="navbar-end">

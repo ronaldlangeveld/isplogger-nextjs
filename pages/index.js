@@ -20,18 +20,18 @@ const Home = ({ cookies }) => {
   return (
     <>
       <Head>
-<title>ISP Logger - Internet performance analytics</title>
-<meta name="title" content="ISP Logger - Internet performance analytics"/>
-<meta name="description" content="ISP Logger - Internet performance analytics"/>
+<title>ISP Logger - Internet speed analytics</title>
+<meta name="title" content="ISP Logger - Internet speed analytics"/>
+<meta name="description" content="ISP Logger - Internet speed analytics"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://isplogger.com/"/>
-<meta property="og:title" content="ISP Logger - Internet performance analytics"/>
-<meta property="og:description" content="Keep track of your internet performance."/>
+<meta property="og:title" content="ISP Logger - Internet speed analytics"/>
+<meta property="og:description" content="Keep track of your internet speed."/>
 <meta property="og:image" content="https://isplogger.com/results.png"/>
 <meta property="twitter:card" content="summary_large_image"/>
 <meta property="twitter:url" content="https://isplogger.com/"/>
-<meta property="twitter:title" content="ISP Logger - Internet performance analytics"/>
-<meta property="twitter:description" content="Keep track of your internet performance."/>
+<meta property="twitter:title" content="ISP Logger - Internet speed analytics"/>
+<meta property="twitter:description" content="Keep track of your internet speed."/>
 <meta property="twitter:image" content="https://isplogger.com/results.png"/>
       </Head>
     <Landing auth={state}/>
