@@ -57,7 +57,7 @@ const Navbar = () => {
             :
             <>
             <div className="navbar-item">
-              <Link href="/upgrade"><button className="button is-primary">Upgrade to Pro</button></Link>
+              <Link href="/upgrade"><button className="button is-primary has-text-weight-bold">Upgrade</button></Link>
             </div>
             </>
           }

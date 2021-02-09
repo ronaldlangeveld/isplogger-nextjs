@@ -82,7 +82,7 @@ const Upgrade = () => {
                 <p className="has-text-centered">Get 50% off forever when you use coupon code <strong>earlyadopter2021</strong></p>
               </div> */}
                     <div className="box">
-                        <p className="has-text-centered"><span className="has-text-weight-strong is-size-1">$12</span>/mo</p>
+                        <p className="has-text-centered"><span className="has-text-weight-strong is-size-1">$9</span>/month</p>
                         <hr/>
                         <ul className="has-text-centered is-size-4-desktop">
                         <li>Unlimited dashboard results history</li>
@@ -92,7 +92,7 @@ const Upgrade = () => {
                         </ul>
                         <hr/>
                        <div className="has-text-centered">
-                       <button disabled={state.isAuthenticated ? false : true} onClick={handlePayment} className="button has-text-weight-bold is-primary is-size-4-desktop">Upgrade $12/mo</button>
+                       <button disabled={state.isAuthenticated ? false : true} onClick={handlePayment} className="button has-text-weight-bold is-primary is-size-4-desktop">Upgrade now</button>
                        </div>
                     </div>
                 </div>
