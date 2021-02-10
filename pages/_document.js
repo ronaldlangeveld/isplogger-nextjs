@@ -15,8 +15,7 @@ class MyDocument extends Document {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ND6ZBGSSEQ"></script>
 <script type="text/javascript" src="/gtag.js">
-<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""/></noscript>
+
 
 
 </script>
@@ -25,8 +24,8 @@ class MyDocument extends Document {
                     <Main />
                     <NextScript />
                     <script src="https://cdn.paddle.com/paddle/paddle.js"></script> 
-
-                
+                    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""/></noscript>
                 </body>
             </Html>
         )
