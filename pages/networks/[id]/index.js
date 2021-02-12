@@ -344,8 +344,8 @@ const Network = ({ networks, cookies, latest }) => {
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const cookies = parseCookies(context.req);
-  console.log(id);
-  console.log(cookies);
+  // console.log(id);
+  // console.log(cookies);
   try {
     const res = await api.get(`network/${id}/`, {
       headers: { Authorization: `Token ${cookies.ttk}` },

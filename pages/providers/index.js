@@ -16,9 +16,9 @@ const Home = ({ cookies, provs }) => {
     }
   const { state, dispatch } = useContext(AuthContext);
 
-  console.log(provs);
+  // console.log(provs);
 
-  console.log(cookies);
+  // console.log(cookies);
 
   useEffect(() => {
     if (cookies.ttk) {
@@ -45,12 +45,12 @@ const Home = ({ cookies, provs }) => {
       </Head>
       <LandNav />
 
-      <section class="hero is-medium">
-  <div class="hero-body">
+      <section className="hero is-medium">
+  <div className="hero-body">
     <div className="container">
-    <p class="title">
+    <h1 className="title">
       ISP's monitored by users speed testing using ISP Logger
-    </p>
+    </h1>
     <div className="columns is-centered is-multiline">
             {
                 provs.map((item, index) => (
@@ -59,7 +59,7 @@ const Home = ({ cookies, provs }) => {
                             <span>
                                 <Flag className="flagSize has-shadow" code={item.country} />
                             </span>
-                            <h1 className="title is-6 has-text-centered px-4 py-4"><span className="has-text-link">{item.display_name !== "" ? item.display_name : item.name}</span></h1>
+                            <Link href={`/providers/${item.slug}`}><h1 className="title is-6 has-text-centered px-4 py-4 is-clickable"><span className="has-text-link">{item.display_name !== "" ? item.display_name : item.name}</span></h1></Link>
                         </div>
                     </div>
                 ))
@@ -80,7 +80,7 @@ export async function getServerSideProps(context) {
     const cookies = parseCookies(context.req);
     const res = await api.get('providers/');
     const provs = res.data;
-    console.log(provs);
+    // console.log(provs);
     return {
       props: {
         cookies,
