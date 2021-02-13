@@ -53,7 +53,6 @@ useEffect(() => {
                 </h2>
                 <Link href="/register" className="button is-link has-text-weight-bold is-size-6 ">
                       <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Try for free. No credit card required</button>
-                    
                     </Link>
                
 
@@ -99,7 +98,6 @@ useEffect(() => {
 
         </div>
       </section>
-    
     </>
   );
 };

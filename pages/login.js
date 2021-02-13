@@ -113,7 +113,11 @@ const Login = () => {
                 </form>
 
                 <div className="mt-6">
-                  Don't have an account? <Link href="/register">Sign up</Link>
+                  <ul>
+                  <li><Link href="/reset_password">Forgot Password?</Link></li>
+                          <li>Don't have an account? <Link href="/register">Sign up</Link></li>
+                  </ul>
+                  
                 </div>
               </div>
             </div>
