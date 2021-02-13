@@ -4,10 +4,9 @@ import {useState} from 'react';
 import api from '../../utils/Api';
 
 const ResetPassword = () => {
+    
     const [btnLoad, setBtnLoad] = useState(false);
     const [success, setSuccess] = useState(false);
-
-
     const onSubmitResetPassword = (e) => {
         e.preventDefault();
         setBtnLoad(true);

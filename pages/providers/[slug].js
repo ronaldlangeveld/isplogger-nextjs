@@ -10,17 +10,17 @@ const Provider = ({ provider, stats }) => {
         <>
             <Head>
                 <title>{provider.display_name ? provider.display_name : provider.name} on ISP Logger</title>
-                <meta name="title" content="ISP Logger - Internet speed analytics" />
-                <meta name="description" content="ISP Logger - Internet speed analytics" />
+                <meta name="title" content={`${provider.display_name ? provider.display_name : provider.name} on ISP Logger`} />
+                <meta name="description" content= {`Browse stats for internet service provider ${provider.display_name ? provider.display_name : provider.name} on ISP Logger`}  />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://isplogger.com/" />
-                <meta property="og:title" content="ISP Logger - Internet speed analytics" />
-                <meta property="og:description" content="Keep track of your internet speed." />
+                <meta property="og:title" content={`${provider.display_name ? provider.display_name : provider.name} on ISP Logger`}  />
+                <meta property="og:description" content={`Browse stats for internet service provider ${provider.display_name ? provider.display_name : provider.name} on ISP Logger`} />
                 <meta property="og:image" content="https://isplogger.com/results.png" />
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="https://isplogger.com/" />
-                <meta property="twitter:title" content="ISP Logger - Internet speed analytics" />
-                <meta property="twitter:description" content="Keep track of your internet speed." />
+                <meta property="twitter:title" content={`${provider.display_name ? provider.display_name : provider.name} on ISP Logger`}  />
+                <meta property="twitter:description" content={`Browse stats for internet service provider ${provider.display_name ? provider.display_name : provider.name} on ISP Logger`} />
                 <meta property="twitter:image" content="https://isplogger.com/results.png" />
             </Head>
             <LandNav />
