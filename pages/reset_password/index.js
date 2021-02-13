@@ -32,7 +32,6 @@ const ResetPassword = () => {
                     <div className="column is-4">
                         <div className="card">
                             <div className="card-content">
-                              
                                 {
                                     success === false ?
                                     <>
