@@ -12,13 +12,11 @@ import { GetUserData } from '../../utils/getUserData';
 
 const Settings = ({ user, token }) => {
 
-    const initState = {
+    const [settData, setSettData] = useState({
         first_name: user.user.first_name || "",
         last_name: user.user.last_name || "",
-        profilepic: "/ufo.jpg"
-    }
-
-    const [settData, setSettData] = useState(initState);
+        avatar: user.avatar.secure_url || "/ufo.jpg"
+    });
 
     const handleFormChange = (e) => {
         const name = e.target.name;
@@ -46,33 +44,37 @@ const Settings = ({ user, token }) => {
         });
     };
 
-    // const uploadImage = (event) => {
-    //     // setUploading(true)
-    //     const file = event.target.files[0];
-    //     console.log(file)
-    //     const formData = new FormData()
-    //     formData.append('profilepic', file);
-    //     console.log(formData)
-    //     api.post(`settings/`,
-    //         formData,
-    //         {
-    //             headers: {
-    //                 Authorization: `Token ${token}`,
-    //                 'content-type': 'multipart/form-data'
-    //             }
-    //         })
-    //         .then((response) => {
-    //             console.log(response)
-    //             //    props.SetImages([...response.data, ...props.ImageList])
-    //             //    setUploading(false);
+    const uploadImage = (event) => {
+        // setUploading(true)
+        const file = event.target.files[0];
+        console.log(file)
+        const formData = new FormData()
+        formData.append('avatar', file);
+        console.log(formData)
+        api.post(`settings/`,
+            formData,
+            {
+                headers: {
+                    Authorization: `Token ${token}`,
+                    'content-type': 'multipart/form-data'
+                }
+            })
+            .then((response) => {
+                console.log(response)
+                setSettData({
+                    ...settData,
+                    avatar: response.data.secure_url
+                })
+                //    props.SetImages([...response.data, ...props.ImageList])
+                //    setUploading(false);
 
-    //         }, (error) => {
+            }, (error) => {
 
-    //             console.log(error)
+                console.log(error)
 
 
-    //         });
-    // }
+            });
+    }
 
 
 
@@ -91,20 +93,20 @@ const Settings = ({ user, token }) => {
                                     <h1 className="title is-5">Settings</h1>
                                     <div className="field">
                                         <label className="label">Profile Picture</label>
-                                        <div style={{ backgroundImage: `url(${settData.profilepic})` }} className="profile-pic-settings rounded">
+                                        <div style={{ backgroundImage: `url(${settData.avatar})` }} className="profile-pic-settings rounded">
 
                                         </div>
                                         <p className="help">Work in progress</p>
-                                        {/* <div className="file is-link is-small mt-4 mb-4">
+                                        <div className="file is-link is-small mt-4 mb-4">
                                             <label className="file-label">
-                                                <input onChange={uploadImage} className="file-input" type="file" name="profilepic"  accept=".jpeg, .png, .jpg" />
+                                                <input onChange={uploadImage} className="file-input" type="file" name="avatar"  accept=".jpeg, .png, .jpg" />
                                                 <span className="file-cta">
                                                     <span className="file-label">
                                                         Change profile picture
                                                     </span>
                                                 </span>
                                             </label>
-                                        </div> */}
+                                        </div>
                                         {/* <p className="has-text-weight-bold has-text-link is-clickable">Change Profile Picture</p> */}
                                     </div>
                                     <form onSubmit={handleFormSubmit}>
