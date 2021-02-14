@@ -68,6 +68,9 @@ const Navbar = () => {
           </>
         }
           <div className="navbar-item">
+          <Link href="/settings"><a>Settings</a></Link>
+          </div>
+          <div className="navbar-item">
           <a onClick={logout}>Logout</a>
           </div>
         </div>
