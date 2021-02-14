@@ -12,11 +12,13 @@ import { GetUserData } from '../../utils/getUserData';
 
 const Settings = ({ user, token }) => {
 
-    const [settData, setSettData] = useState({
+    const initLoad = {
         first_name: user.user.first_name || "",
         last_name: user.user.last_name || "",
-        avatar: user.avatar.secure_url || "/ufo.jpg"
-    });
+        avatar: user.avatar ? user.avatar.secure_url : '/ufo.jpg'
+    }
+
+    const [settData, setSettData] = useState(initLoad);
 
     const handleFormChange = (e) => {
         const name = e.target.name;
