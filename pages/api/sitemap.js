@@ -41,6 +41,14 @@ const providers = await api.get('providers/').then((res) => {
   smStream.write({
     url: "/",
   });
+  
+  smStream.write({
+    url: "/login",
+  });
+
+  smStream.write({
+    url: "/register",
+  });
 
   // Add a static url to ex: about page
   smStream.write({
