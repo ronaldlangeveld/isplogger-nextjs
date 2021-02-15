@@ -51,23 +51,13 @@ const providers = await api.get('providers/').then((res) => {
     url: "/providers",
   });
 
-//   // add all dynamic url to the sitemap which is fetched from a source.
-//  await providers.forEach((item) => {
-//     smStream.write({
-//       url: `/providers/${item.slug}`,
-//     //   lastmod: element.publishedAt,
-//     });
-//   });
-
 
 providers.map((item, index) => {
     smStream.write({
         url: `/providers/${item.slug}`,
+        changefreq: 'daily'
     })
 });
-
-
-
 
 
   // tell sitemap that there is nothing more to add to the sitemap
