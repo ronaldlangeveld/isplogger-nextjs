@@ -36,29 +36,55 @@ const Upgrade = () => {
 
     }
 
-    const handlePayment  = (e) => {
-        Paddle.Checkout.open({
-            product:  643089,
-            email:  state.user_data.user.email || null,
-            successCallback: (data, err) => {
-                if(data){
-                    api.post('make-sub/', data, {
-                        headers: { Authorization: `Token ${state.token}` },
-                      }).then((res) => {
-                          console.log(res);
-                          alert("Success");
-                            getData();
-                          router.push('/dashboard');
-                      }, (err) => {
-                          alert("something went wrong please contact support");
-                      })
-                }
-                }
-                })
-            };
+    // const handlePayment  = (e) => {
+    //     Paddle.Checkout.open({
+    //         product:  643089,
+    //         email:  state.user_data.user.email || null,
+    //         successCallback: (data, err) => {
+    //             if(data){
+    //                 api.post('make-sub/', data, {
+    //                     headers: { Authorization: `Token ${state.token}` },
+    //                   }).then((res) => {
+    //                       console.log(res);
+    //                       alert("Success");
+    //                         getData();
+    //                       router.push('/dashboard');
+    //                   }, (err) => {
+    //                       alert("something went wrong please contact support");
+    //                   })
+    //             }
+    //             }
+    //             })
+    //         };
 
 
   useEffect(() => {
+
+    Paddle.Checkout.open({
+        method: 'inline',
+        product: 643089,       // Replace with your Product or Plan ID
+        email: state.user_data.user.email || null,
+        allowQuantity: false,
+        disableLogout: true,
+        frameTarget: 'checkout-container', // The className of your checkout <div>
+        frameInitialHeight: 416,
+        frameStyle: 'width:100%; min-width:312px; background-color: transparent; border: none;',    // Please ensure the minimum width is kept at or above 286px with checkout padding disabled, or 312px with checkout padding enabled. See "General" section under "Branded Inline Checkout" below for more information on checkout padding.
+        successCallback: (data, err) => {
+            if(data){
+                api.post('make-sub/', data, {
+                    headers: { Authorization: `Token ${state.token}` },
+                  }).then((res) => {
+                      console.log(res);
+                      alert("Success");
+                        getData();
+                      router.push('/dashboard');
+                  }, (err) => {
+                      alert("something went wrong please contact support");
+                  })
+            }
+            }
+    
+    });
 
   }, [state])
 
@@ -91,8 +117,8 @@ const Upgrade = () => {
                         <li>Email Support</li>
                         </ul>
                         <hr/>
-                       <div className="has-text-centered">
-                       <button disabled={state.isAuthenticated ? false : true} onClick={handlePayment} className="button has-text-weight-bold is-primary is-size-4-desktop">Upgrade now</button>
+                       <div className="has-text-centered checkout-container">
+                       {/* <button disabled={state.isAuthenticated ? false : true} onClick={handlePayment} className="button has-text-weight-bold is-primary is-size-4-desktop">Upgrade now</button> */}
                        </div>
                     </div>
                 </div>
