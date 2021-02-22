@@ -9,17 +9,17 @@ const Provider = ({ provider, stats }) => {
     return (
         <>
             <Head>
-                <title>{provider.display_name ? provider.display_name : provider.name} speed tests on ISP Logger</title>
-                <meta name="title" content={`${provider.display_name ? provider.display_name : provider.name} speed tests on ISP Logger`} />
+                <title>{provider.display_name ? provider.display_name : provider.name} speed tests logged on ISP Logger</title>
+                <meta name="title" content={`${provider.display_name ? provider.display_name : provider.name} speed tests logged on ISP Logger`} />
                 <meta name="description" content= {`Browse stats speed test for internet service provider ${provider.display_name ? provider.display_name : provider.name} on ISP Logger`}  />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://isplogger.com/" />
-                <meta property="og:title" content={`${provider.display_name ? provider.display_name : provider.name} speed tests on ISP Logger`}  />
-                <meta property="og:description" content={`Browse speed test stats for internet service provider ${provider.display_name ? provider.display_name : provider.name} speed tests on ISP Logger`} />
+                <meta property="og:title" content={`${provider.display_name ? provider.display_name : provider.name} speed tests logged on ISP Logger`}  />
+                <meta property="og:description" content={`Browse speed test stats for internet service provider ${provider.display_name ? provider.display_name : provider.name} speed tests logged on ISP Logger`} />
                 <meta property="og:image" content="https://isplogger.com/results.png" />
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="https://isplogger.com/" />
-                <meta property="twitter:title" content={`${provider.display_name ? provider.display_name : provider.name} speed tests on ISP Logger`}  />
+                <meta property="twitter:title" content={`${provider.display_name ? provider.display_name : provider.name} speed tests logged on ISP Logger`}  />
                 <meta property="twitter:description" content={`Browse speed test stats for internet service provider ${provider.display_name ? provider.display_name : provider.name} on ISP Logger`} />
                 <meta property="twitter:image" content="https://isplogger.com/results.png" />
             </Head>

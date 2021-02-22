@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import API from '../utils/Api';
 import Humanize from 'humanize-plus';
-const Landing = ({ auth, statistics, providers }) => {
+const Landing = ({ auth, statistics }) => {
 
 
   var initialData = {
@@ -14,7 +14,7 @@ const Landing = ({ auth, statistics, providers }) => {
     networks: statistics.networks || 0
   }
 
-  var isps = providers || [];
+  // var isps = providers || [];
 
 
   const [stats, setStats] = useState(initialData)
@@ -45,7 +45,7 @@ const Landing = ({ auth, statistics, providers }) => {
             <div className="columns is-centered">
               <div className="column is-8 has-text-centered">
                 <h1 className="title is-1 is-size-3-mobile ">
-                  Easily keep track of your internet speed.
+                  Internet Speed Analytics
                 </h1>
                 <h2 className="subtitle is-3 is-size-5-mobile ">
                   Automated internet speed logger for your connection at home,
@@ -74,7 +74,7 @@ const Landing = ({ auth, statistics, providers }) => {
               <img style={{ marginTop: '-12%' }} className="rounded shadow" src="/screenie.png" />
               <div className="container mt-6">
               <h1 className="title is-3 is-size-4-mobile">ISP Logger tests your internet speed every hour, stores your results and grades it's performance.</h1>
-              <h2 className="subtitle is-5 is-size-6-mobile">Designed as a tool to monitor the stability of your internet speed to ensure you get from your Internet Service Provider what you're paying for.</h2>
+              <h2 className="subtitle is-5 is-size-6-mobile">Designed as a tool to monitor and analyze the stability of your internet speed to ensure you get from your Internet Service Provider what you're paying for.</h2>
               </div>
             </div>
           </div>

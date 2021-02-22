@@ -29,7 +29,7 @@ const Home = ({ cookies, provs }) => {
   return (
     <>
       <Head>
-<title>ISP's Tracked on ISP Logger</title>
+<title>ISP's Logged by ISP Logger</title>
 <meta name="title" content="ISP Logger - Internet speed analytics"/>
 <meta name="description" content="ISP Logger - Internet speed analytics"/>
 <meta property="og:type" content="website"/>
@@ -45,11 +45,11 @@ const Home = ({ cookies, provs }) => {
       </Head>
       <LandNav />
 
-      <section className="hero is-medium">
+      <section className="hero is-medium is-dark">
   <div className="hero-body">
     <div className="container">
     <h1 className="title">
-      ISP's monitored by users speed testing using ISP Logger
+      ISP's logged by users using <a href="/">ISP Logger</a>
     </h1>
     <div className="columns is-centered is-multiline">
             {

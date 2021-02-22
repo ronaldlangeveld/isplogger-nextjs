@@ -6,7 +6,7 @@ import Landing from '../components/landing';
 import Footer from '../components/footer';
 import api from '../utils/Api';
 
-const Home = ({ cookies, stats, providers }) => {
+const Home = ({ cookies, stats }) => {
   const { state, dispatch } = useContext(AuthContext);
 
   console.log(cookies);
@@ -34,7 +34,7 @@ const Home = ({ cookies, stats, providers }) => {
 <meta property="twitter:description" content="Keep track of your internet speed."/>
 <meta property="twitter:image" content="https://isplogger.com/results.png"/>
       </Head>
-    <Landing statistics={stats} auth={state} providers={providers} />
+    <Landing statistics={stats} auth={state} />
     <Footer/>
     </>
   );
@@ -45,15 +45,15 @@ export async function getServerSideProps(context) {
   try {
     const cookies = parseCookies(context.req);
     const res = await api.get('open-stats/');
-    const provs = await api.get('providers/');
-    const providers = provs.data;
-    console.log(providers)
+    // const provs = await api.get('providers/');
+    // const providers = provs.data;
+    // console.log(providers)
     const stats = res.data;
     return {
       props: {
         cookies,
         stats,
-        providers
+        // providers
       },
     };
   } catch (err) {
