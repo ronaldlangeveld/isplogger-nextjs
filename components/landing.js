@@ -1,101 +1,83 @@
 import Image from 'next/image';
 import LandNav from './landNav';
 import Link from 'next/link';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import API from '../utils/Api';
-const Landing = ({ auth }) => {
+import Humanize from 'humanize-plus';
+const Landing = ({ auth, statistics, providers }) => {
 
 
   var initialData = {
-    tests: 0,
-    download: 0,
-    upload: 0,
-    networks: 0
+    tests: statistics.tests || 0,
+    download: statistics.download || 0,
+    upload: statistics.upload || 0,
+    networks: statistics.networks || 0
   }
+
+  var isps = providers || [];
 
 
   const [stats, setStats] = useState(initialData)
 
-useEffect(() => {
-  API.get('open-stats/').then((res)=> {
-    var data = res.data;
-    setStats({
-      ...stats,
-      tests: data.tests,
-      download: data.download,
-      upload: data.upload,
-      networks: data.networks
-    })
-  }, (err) => {
-    console.log(err)
-  })
+  // useEffect(() => {
+  //   API.get('open-stats/').then((res) => {
+  //     var data = res.data;
+  //     setStats({
+  //       ...stats,
+  //       tests: data.tests,
+  //       download: data.download,
+  //       upload: data.upload,
+  //       networks: data.networks
+  //     })
+  //   }, (err) => {
+  //     console.log(err)
+  //   })
 
-}, [])
+  // }, []);
 
   return (
     <>
-     <LandNav />
+      <LandNav />
 
-      <section className="hero is-white is-medium is-bold">
-      {/* <div className="notification is-primary mb-6"><p className="has-text-centered has-text-weight-bold is-size-5">I'm live on Product Hunt! <a href="https://www.producthunt.com/posts/isp-logger" target="_blank">Join the conversation</a></p></div> */}
-
+      <section className="hero is-dark is-large is-bold">
         <div className="hero-body">
           <div className="container">
-            <div className="columns">
-              <div className="column is-8">
-                <span className="tag is-info mb-3">Beta</span>
-                <h1 className="title is-1 is-size-3-mobile">
-                  Keep track of your internet speed.
+            <div className="columns is-centered">
+              <div className="column is-8 has-text-centered">
+                <h1 className="title is-1 is-size-3-mobile ">
+                  Easily keep track of your internet speed.
                 </h1>
-                <h2 className="subtitle is-3 is-size-5-mobile">
+                <h2 className="subtitle is-3 is-size-5-mobile ">
                   Automated internet speed logger for your connection at home,
                   office and servers.
                 </h2>
-                <Link href="/register" className="button is-link has-text-weight-bold is-size-6 ">
-                      <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Try for free. No credit card required</button>
-                    </Link>
-               
-
-                  {/* <p className="help">* Free features limited. Premium billed $12 monthly.</p> */}
-
+                <div className=" ">
+                  <Link href="/register">
+                    <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Try for free. No credit card required</button>
+                  </Link>
+                </div>
                 <br />
-                <p className="mt-4">
-                  ISP Logger is a tiny script that runs on Linux, MacOS and
-                  Windows that runs via a Docker package.
-                  <br />
-                  Analyze performance on a cloud based dashboard, accessible
-                  from anywhere.
+                <p className="mt-4 is-size-5  ">
+                  Join over <strong>350</strong> users who have had their internet speeds tested <strong>{Humanize.intComma(stats.tests)}</strong> times.
                 </p>
-                <div className="has-text-left mt-6">
-            <p className="title">Live stats from the cloud</p>
-            <ul>
-              <li><strong>{stats.tests}</strong> tests logged</li>
-              <li><strong>{parseFloat(stats.download / 1000000).toFixed(2)} mbps </strong>is the fastest download speed logged so far</li>
-              <li><strong>{parseFloat(stats.upload / 1000000).toFixed(2)} mbps </strong>is the fastest upload speed logged so far</li>
-              <li><strong>{stats.networks}</strong> networks are currently being monitored by ISP Logger</li>
-            </ul>
-            </div>
-              </div>
-              <div className="column is-hidden-mobile">
-                <img src="/speed_test.svg" alt="speed_test_img" />
+
               </div>
             </div>
 
           </div>
         </div>
       </section>
-      <section className="hero is-medium is-link is-bold">
+      <section className="hero is-light">
         <div className="hero-body">
-
-          <div className="container">
-          <div className="has-text-centered">
-            <h1 className="title">Full summary to indicate the overall performance of your network</h1>
-          <img className="rounded shadow" src="/stats.png" />
-          <h1 className="title mt-6">Don't miss a beat and find the less performant times </h1>
-          <img className="rounded shadow" src="/results.png" />
-          </div>
+          <div>
+            <div className="has-text-centered">
+              <img style={{ marginTop: '-12%' }} className="rounded shadow" src="/screenie.png" />
+              <div className="container mt-6">
+              <h1 className="title is-3 is-size-4-mobile">ISP Logger tests your internet speed every hour, stores your results and grades it's performance.</h1>
+              <h2 className="subtitle is-5 is-size-6-mobile">Designed as a tool to monitor the stability of your internet speed to ensure you get from your Internet Service Provider what you're paying for.</h2>
+              </div>
             </div>
-
+          </div>
         </div>
       </section>
     </>
