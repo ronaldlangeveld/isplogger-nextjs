@@ -27,12 +27,12 @@ const Home = ({ cookies, stats }) => {
 <meta property="og:url" content="https://isplogger.com/"/>
 <meta property="og:title" content="ISP Logger - Internet speed analytics"/>
 <meta property="og:description" content="Keep track of your internet speed."/>
-<meta property="og:image" content="https://isplogger.com/results.png"/>
+<meta property="og:image" content="https://isplogger.com/sns_card.png"/>
 <meta property="twitter:card" content="summary_large_image"/>
 <meta property="twitter:url" content="https://isplogger.com/"/>
 <meta property="twitter:title" content="ISP Logger - Internet speed analytics"/>
 <meta property="twitter:description" content="Keep track of your internet speed."/>
-<meta property="twitter:image" content="https://isplogger.com/results.png"/>
+<meta property="twitter:image" content="https://isplogger.com/sns_card.png"/>
       </Head>
     <Landing statistics={stats} auth={state} />
     <Footer/>
