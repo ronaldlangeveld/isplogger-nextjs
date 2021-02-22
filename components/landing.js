@@ -11,7 +11,8 @@ const Landing = ({ auth, statistics }) => {
     tests: statistics.tests || 0,
     download: statistics.download || 0,
     upload: statistics.upload || 0,
-    networks: statistics.networks || 0
+    networks: statistics.networks || 0,
+    users: statistics.users || 0
   }
 
   // var isps = providers || [];
@@ -58,7 +59,7 @@ const Landing = ({ auth, statistics }) => {
                 </div>
                 <br />
                 <p className="mt-4 is-size-5  ">
-                  Join over <strong>350</strong> users who have had their internet speeds tested <strong>{Humanize.intComma(stats.tests)}</strong> times.
+                  Join <strong>{Humanize.intComma(stats.users)}</strong> users who have had their internet speeds tested <strong>{Humanize.intComma(stats.tests)}</strong> times.
                 </p>
 
               </div>
