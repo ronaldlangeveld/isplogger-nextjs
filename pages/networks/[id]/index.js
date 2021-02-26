@@ -196,17 +196,11 @@ const Network = ({ networks, cookies, latest }) => {
               <nav className="level">
                 <div className="level-left">
                   <div className="level-item">
-                    <Link href={`/networks/${id}/settings`}><span className="is-size-6 has-text-weight-bold has-text-link is-clickable">Settings</span></Link> <span className="ml-3 mb-3 tag is-primary is-size-7">New</span>
+                    <Link href={`/networks/${id}/settings`}><span className="is-size-6 has-text-weight-bold has-text-link is-clickable">Settings</span></Link>
                   </div>
                   <div className="level-item">
-                 <span onClick={toggleDlModal} className="is-size-6 has-text-weight-bold has-text-link is-clickable">Export Data</span> <span className="ml-3 mb-3 tag is-primary is-size-7">New</span>
+                 <span onClick={toggleDlModal} className="is-size-6 has-text-weight-bold has-text-link is-clickable">Export Data</span>
                   </div>
-                  {/* <div className="level-item">
-
-                    <span onClick={toggleDlModal} className="is-size-6 has-text-weight-bold has-text-link is-clickable">Export Data <span className="ml-3 mb-3 tag is-primary is-size-7">New</span></span>
-
-
-                  </div> */}
                 </div>
                 <div className="level-right">
                   <div className="level-item">

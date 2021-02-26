@@ -62,6 +62,18 @@ const NetworkSettings = ({ initData, cookies }) => {
         });
     };
 
+    const deleteNetwork = async(e) => {
+        var toDel = window.confirm('Are you sure?');
+        if(toDel === true){
+            await api.delete(`network/${id}/settings/`, {headers: { Authorization: `Token ${cookies.ttk}` }}).then((res)=> {
+                console.log('deleted');
+                router.push('/dashboard');
+            }, (err) => {
+                alert('Oops, something went wrong.')
+            })
+        }
+    };
+
     return (
         <>
             <Layout>
@@ -109,8 +121,14 @@ const NetworkSettings = ({ initData, cookies }) => {
                                                     </a>
                                                 </p>
                                             </div>
-                                            <button type="submit" className="button is-primary mt-2">Save Changes</button>
+                                            <button type="submit" className="button is-primary mt-6 has-text-weight-bold is-fullwidth">Save Changes</button>
                                             </form>
+                                            <hr/>
+                                      
+
+                                            <button onClick={deleteNetwork} className="button mt-4 is-size-7">Delete this network</button>
+                                            <p className="help">This cannot be undone. Once deleted, always deleted.</p>
+
                                         </div>
                                     </div>
                                 </div>
