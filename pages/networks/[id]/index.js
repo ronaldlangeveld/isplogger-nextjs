@@ -171,11 +171,11 @@ const Network = ({ networks, cookies, latest }) => {
 
   const toggleDlModal = () => {
     console.log(results.length);
-    if(state.user_data.pro !== true){
+    if (state.user_data.pro !== true) {
       router.push('/upgrade');
     }
-    if(results.length === 0 || results === null){
-     alert('Oops, you need to perform some tests first before you can export results.')
+    if (results.length === 0 || results === null) {
+      alert('Oops, you need to perform some tests first before you can export results.')
     } else {
       setdlModal(!dlModal);
     }
@@ -199,7 +199,7 @@ const Network = ({ networks, cookies, latest }) => {
                     <Link href={`/networks/${id}/settings`}><span className="is-size-6 has-text-weight-bold has-text-link is-clickable">Settings</span></Link>
                   </div>
                   <div className="level-item">
-                 <span onClick={toggleDlModal} className="is-size-6 has-text-weight-bold has-text-link is-clickable">Export Data</span>
+                    <span onClick={toggleDlModal} className="is-size-6 has-text-weight-bold has-text-link is-clickable">Export Data</span>
                   </div>
                 </div>
                 <div className="level-right">
@@ -266,7 +266,7 @@ const Network = ({ networks, cookies, latest }) => {
 
                                 </>
                                 :
-                               <GoPro/>
+                                <GoPro />
                             }
                           </>
                           :

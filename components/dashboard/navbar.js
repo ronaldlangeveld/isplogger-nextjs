@@ -44,6 +44,10 @@ const Navbar = () => {
                 <a className="navbar-item">
                   Setup Guide
         </a></Link>
+        <Link href="/providers">
+                <a className="navbar-item">
+                  ISP's
+        </a></Link>
         </div>
 
         <div className="navbar-end">

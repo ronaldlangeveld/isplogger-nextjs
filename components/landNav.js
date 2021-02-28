@@ -41,8 +41,15 @@ const LandNav = () => {
         </div>
 
         <div className="navbar-end">
-
-          <div className="navbar-item">
+          {
+            state.isAuthenticated === true?
+            <>
+            <div className="navbar-item">
+            <Link href="/dashboard"><a className="has-text-weight-bold">Dashboard</a></Link>
+          </div>
+            </>
+            :
+            <div className="navbar-item">
             <div className="buttons">
               <Link href="/register">
                 <a className="button is-primary">
@@ -56,6 +63,7 @@ const LandNav = () => {
               </Link>
             </div>
           </div>
+          }
         </div>
       </div>
     </nav>

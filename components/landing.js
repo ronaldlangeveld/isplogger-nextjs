@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import API from '../utils/Api';
 import Humanize from 'humanize-plus';
+
 const Landing = ({ auth, statistics }) => {
 
-
+  console.log(auth)
   var initialData = {
     tests: statistics.tests || 0,
     download: statistics.download || 0,
@@ -52,10 +53,19 @@ const Landing = ({ auth, statistics }) => {
                   Automated internet speed logger for your connection at home,
                   office and servers.
                 </h2>
-                <div className=" ">
-                  <Link href="/register">
-                    <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Try for free. No credit card required</button>
+                <div>
+                 {
+                   auth.isAuthenticated ?
+                   <>
+                    <Link href="/dashboard">
+                    <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Go to your dashboard</button>
                   </Link>
+                   </>
+                   :
+                   <Link href="/register">
+                   <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Try for free. No credit card required</button>
+                 </Link>
+                 }
                 </div>
                 <br />
                 <p className="mt-4 is-size-5  ">
