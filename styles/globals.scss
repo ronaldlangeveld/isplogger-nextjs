@@ -186,3 +186,12 @@ overflow: hidden;
 white-space: nowrap;
 text-overflow: ellipsis;
 }
+
+
+.profile-pic-comments {
+  height: 64px;
+  width: 64px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 100%;
+}

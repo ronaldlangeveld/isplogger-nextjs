@@ -4,7 +4,6 @@ import Link from 'next/link';
 
 const AboutComp = ({ auth }) => {
 
-
     const profile = {
         height: '200px',
         width: '200px',

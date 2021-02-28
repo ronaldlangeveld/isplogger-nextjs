@@ -40,7 +40,6 @@ const Landing = ({ auth, statistics }) => {
   return (
     <>
       <LandNav />
-
       <section className="hero is-dark is-large is-bold">
         <div className="hero-body">
           <div className="container">
@@ -54,18 +53,18 @@ const Landing = ({ auth, statistics }) => {
                   office and servers.
                 </h2>
                 <div>
-                 {
-                   auth.isAuthenticated ?
-                   <>
-                    <Link href="/dashboard">
-                    <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Go to your dashboard</button>
-                  </Link>
-                   </>
-                   :
-                   <Link href="/register">
-                   <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Try for free. No credit card required</button>
-                 </Link>
-                 }
+                  {
+                    auth.isAuthenticated ?
+                      <>
+                        <Link href="/dashboard">
+                          <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Go to your dashboard</button>
+                        </Link>
+                      </>
+                      :
+                      <Link href="/register">
+                        <button className="button is-primary has-text-weight-bold is-size-4-desktop ">Try for free. No credit card required</button>
+                      </Link>
+                  }
                 </div>
                 <br />
                 <p className="mt-4 is-size-5  ">
@@ -84,8 +83,8 @@ const Landing = ({ auth, statistics }) => {
             <div className="has-text-centered">
               <img style={{ marginTop: '-12%' }} className="rounded shadow" src="/screenie.png" />
               <div className="container mt-6">
-              <h1 className="title is-3 is-size-4-mobile">ISP Logger tests your internet speed every hour, stores your results and grades it's performance.</h1>
-              <h2 className="subtitle is-5 is-size-6-mobile">Designed as a tool to monitor and analyze the stability of your internet speed to ensure you get from your Internet Service Provider what you're paying for.</h2>
+                <h1 className="title is-3 is-size-4-mobile">ISP Logger tests your internet speed every hour, stores your results and grades it's performance.</h1>
+                <h2 className="subtitle is-5 is-size-6-mobile">Designed as a tool to monitor and analyze the stability of your internet speed to ensure you get from your Internet Service Provider what you're paying for.</h2>
               </div>
             </div>
           </div>
